@@ -147,15 +147,13 @@ export default function App() {
           </div>
         </div>
 
-        {/* Right — light */}
-        <div className="hidden lg:flex bg-[#EDE8DE] w-full lg:w-1/2 flex-col justify-end px-16 pb-20 pt-36">
+        {/* Right — accent */}
+        <div className="hidden lg:flex bg-[#D94B00] w-full lg:w-1/2 flex-col justify-end px-16 pb-20 pt-36">
           <div className="relative">
-            <div className="w-[300px] h-[400px] ml-auto mr-12 bg-[#D4CFC5] overflow-hidden">
-              <img
-                src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&h=800&fit=crop&auto=format"
-                alt="Lee Seo-jun, full-stack software engineer"
-                className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700"
-              />
+            <div className="ml-auto mr-12 w-[360px] h-[400px] border-y-2 border-[#0A0A0A] flex flex-col justify-between py-8">
+              <div className="h-px w-full bg-[#0A0A0A]" />
+              <div className="h-px w-full bg-[#0A0A0A]" />
+              <div className="h-px w-full bg-[#0A0A0A]" />
             </div>
             {/* Stats strip */}
             <div className="flex mt-10 border-t-2 border-[#0A0A0A]">
@@ -168,7 +166,7 @@ export default function App() {
                   <div style={SLAB} className="text-[#0A0A0A] text-3xl font-black leading-none">
                     {num}
                   </div>
-                  <div style={MONO} className="text-[10px] tracking-[0.22em] text-[#7A7570] uppercase mt-1.5">
+                  <div style={MONO} className="text-[10px] tracking-[0.22em] text-[#0A0A0A]/60 uppercase mt-1.5">
                     {label}
                   </div>
                 </div>
