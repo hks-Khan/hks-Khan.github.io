@@ -1,0 +1,253 @@
+@keyframes loader-panel-out {
+  0% {
+    transform: translateY(0) scaleY(1);
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+  72% {
+    transform: translateY(0) scaleY(1);
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+  100% {
+    transform: translateY(-105%) scaleY(0.92);
+    border-bottom-left-radius: 48px;
+    border-bottom-right-radius: 48px;
+  }
+}
+
+@keyframes loader-mark-pop {
+  0% {
+    opacity: 0;
+    transform: translateY(28px) rotate(-4deg);
+  }
+  35% {
+    opacity: 1;
+    transform: translateY(0) rotate(0deg);
+  }
+  68% {
+    opacity: 1;
+    transform: translateY(0) rotate(0deg);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-32px) rotate(4deg);
+  }
+}
+
+@keyframes hero-slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(110%) rotate(2deg);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) rotate(0deg);
+  }
+}
+
+@keyframes hero-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes hero-line-grow {
+  from {
+    opacity: 0;
+    transform: scaleX(0);
+  }
+  to {
+    opacity: 1;
+    transform: scaleX(1);
+  }
+}
+
+.portfolio-loader {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: grid;
+  place-items: center;
+  background: #e60012;
+  color: #ffffff;
+  box-shadow: inset 0 -18px 70px rgba(0, 0, 0, 0.2);
+  animation: loader-panel-out 1.1s cubic-bezier(0.7, 0, 0.1, 1) forwards;
+  transform-origin: top center;
+}
+
+.portfolio-loader__mark {
+  font-size: clamp(64px, 14vw, 180px);
+  font-weight: 900;
+  line-height: 0.85;
+  letter-spacing: -0.08em;
+  animation: loader-mark-pop 1s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.portfolio-loader__caption {
+  position: absolute;
+  bottom: 48px;
+  font-size: 10px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+}
+
+.hero-grid {
+  position: absolute;
+  inset: 0;
+  opacity: 0.55;
+  background-image:
+    linear-gradient(rgba(230, 0, 18, 0.055) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(15, 23, 42, 0.045) 1px, transparent 1px);
+  background-size: 96px 96px;
+}
+
+.hero-kicker,
+.hero-copy,
+.hero-cta,
+.hero-social,
+.hero-contact {
+  opacity: 0;
+  animation: hero-fade-in 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.hero-kicker {
+  animation-delay: 1.05s;
+}
+
+.hero-copy {
+  animation-delay: 1.55s;
+}
+
+.hero-cta,
+.hero-social {
+  animation-delay: 1.75s;
+}
+
+.hero-contact {
+  animation-delay: 1.9s;
+}
+
+.hero-portrait {
+  opacity: 0;
+  position: relative;
+  overflow: hidden;
+  animation: hero-fade-in 0.82s cubic-bezier(0.22, 1, 0.36, 1) 1.42s forwards;
+}
+
+.hero-title {
+  display: grid;
+  gap: 0;
+  overflow: hidden;
+}
+
+.hero-title span {
+  display: block;
+  opacity: 0;
+  transform-origin: left bottom;
+  animation: hero-slide-up 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.hero-title span:nth-child(1) {
+  animation-delay: 1.1s;
+}
+
+.hero-title span:nth-child(2) {
+  animation-delay: 1.25s;
+}
+
+.hero-title span:nth-child(3) {
+  animation-delay: 1.4s;
+}
+
+.project-app-card {
+  position: relative;
+  isolation: isolate;
+}
+
+.project-app-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    linear-gradient(135deg, rgba(230, 0, 18, 0.065), transparent 42%),
+    rgba(255, 255, 255, 0.2);
+  opacity: 0;
+  transition: opacity 0.35s ease;
+}
+
+.project-app-card:hover::before {
+  opacity: 1;
+}
+
+.reveal-on-scroll {
+  opacity: 0;
+  transform: translateY(44px);
+  transition:
+    opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.reveal-on-scroll.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (max-width: 1023px) {
+  .hero-grid {
+    background-size: 64px 64px;
+    opacity: 0.1;
+  }
+
+  .hero-portrait {
+    max-width: none;
+  }
+}
+
+@media (max-width: 767px) {
+  .portfolio-loader__caption {
+    bottom: 32px;
+  }
+
+  .hero-title {
+    max-width: 100%;
+  }
+
+  .reveal-on-scroll {
+    transform: translateY(28px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .portfolio-loader {
+    display: none;
+  }
+
+  .reveal-on-scroll,
+  .hero-kicker,
+  .hero-copy,
+  .hero-cta,
+  .hero-social,
+  .hero-contact,
+  .hero-portrait,
+  .hero-title span {
+    opacity: 1;
+    transform: none;
+  }
+}
