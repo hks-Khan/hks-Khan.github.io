@@ -603,24 +603,6 @@ const ABOUT_POINTS = [
   },
 ];
 
-function ProjectPreview({ project }: { project: Project }) {
-  return (
-    <figure className="mb-6 overflow-hidden rounded-[18px] border border-[#E5E5EA] bg-[#F5F5F7]">
-      <div className="flex h-[260px] items-center justify-center p-4 sm:h-[290px]">
-        <img
-          src={project.image}
-          alt={`${project.title} — ${project.imageLabel}`}
-          loading="lazy"
-          className="max-h-full max-w-full rounded-[8px] object-contain shadow-[0_6px_24px_rgba(15,23,42,0.10)]"
-        />
-      </div>
-      <figcaption className="border-t border-[#E5E5EA] bg-white px-4 py-2.5 text-[11px] leading-relaxed text-[#6E6E73]">
-        {project.imageLabel}
-      </figcaption>
-    </figure>
-  );
-}
-
 const getSectionImages = (section: PlanningSection) =>
   section.images?.length ? section.images : section.image ? [section.image] : [];
 
@@ -842,7 +824,7 @@ export default function App() {
                     : ""
                 }`}
               >
-                <div className="mb-6 flex min-h-16 items-start justify-between gap-5">
+                <div className="mb-10 flex items-start justify-between gap-5">
                   {project.logo && (
                     <div className="grid h-16 w-16 shrink-0 place-items-center overflow-hidden rounded-[18px] bg-[#F5F5F7] shadow-[0_14px_34px_rgba(15,23,42,0.12)] ring-1 ring-[#E5E5EA] transition-colors duration-300 group-hover:ring-[#E60012]/25">
                       <img src={project.logo} alt={`${project.title} logo`} className="h-full w-full object-cover" />
@@ -852,8 +834,6 @@ export default function App() {
                     {project.status}
                   </span>
                 </div>
-
-                <ProjectPreview project={project} />
 
                 <div className="flex flex-1 flex-col">
                   <div className="mb-4 flex items-start justify-between gap-4">
@@ -933,7 +913,7 @@ export default function App() {
                     : ""
                 }`}
               >
-                <div className="mb-5 flex min-h-12 items-start justify-between gap-4">
+                <div className="mb-8 flex items-start justify-between gap-4">
                   {project.logo && (
                     <div className="grid h-12 w-12 shrink-0 place-items-center overflow-hidden rounded-[14px] bg-[#F5F5F7] shadow-[0_10px_26px_rgba(15,23,42,0.1)] ring-1 ring-[#E5E5EA] transition-colors duration-300 group-hover:ring-[#E60012]/25">
                       <img src={project.logo} alt={`${project.title} logo`} className="h-full w-full object-cover" />
@@ -943,8 +923,6 @@ export default function App() {
                     {project.status}
                   </span>
                 </div>
-
-                <ProjectPreview project={project} />
 
                 <div className="flex flex-1 flex-col">
                   <div style={MONO} className="mb-3 text-[10px] uppercase tracking-[0.18em] text-[#E60012] transition-colors duration-300">
