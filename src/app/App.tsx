@@ -11,6 +11,7 @@ type PlanningSection = {
   title: string;
   image: string;
   images?: string[];
+  imageCaption?: string;
   intent: string;
   execution: string;
 };
@@ -40,7 +41,7 @@ const PROJECTS: Project[] = [
     "title": "Jitdeck",
     "subtitle": "AI Developer Tools",
     "status": "개발 중",
-    "description": "여러 프로젝트의 다음 할 일과 AI 작업 상태를 한곳에서 확인하기 위해 만든 macOS 개발 도구입니다.",
+    "description": "Linear를 사용하며 떠올린 AI 프로젝트 관리 방식을 직접 구현한 macOS 앱입니다.",
     "tags": [
       "Swift",
       "SwiftUI",
@@ -52,21 +53,22 @@ const PROJECTS: Project[] = [
       "승인·질문·검증 기록을 작업에 연결",
       "완료 이슈를 개발로그 초안으로 활용"
     ],
-    "detailIntro": "여러 개인 프로젝트를 병행하면서 대화마다 흩어진 결정과 작업 결과를 다시 찾는 일이 반복됐습니다. 지금 어느 단계에 있고, 무엇을 먼저 해야 하는지 프로젝트별로 확인하고 싶었습니다. Jitdeck은 이 문제에서 시작한 macOS 앱으로, 직접 사용하면서 작업 관리와 AI 실행 기능을 개발하고 있습니다.",
+    "detailIntro": "Linear 같은 프로젝트 관리 도구를 사용하면서, AI를 더 적극적으로 활용해 프로젝트를 관리하고 싶었습니다. 대화로 할 일을 등록하고 진행 상황과 작업 결과까지 이어서 관리할 수 있도록 Jitdeck을 만들기 시작했습니다. 현재 직접 사용하며 기능을 개발하고 출시를 준비하고 있습니다.",
     "planningSections": [
       {
         "label": "01 / AI Developer Tools",
-        "title": "프로젝트를 다시 파악하는 시간을 줄이기",
-        "image": "",
-        "intent": "프로젝트를 바꿀 때마다 대화 기록과 Git 상태, 남은 할 일을 따로 확인해야 했습니다. 한동안 손을 놓았던 프로젝트도 다시 시작할 지점을 찾기 쉬워야 한다고 생각했습니다.",
-        "execution": "프로젝트 아래에 이슈와 진행 기록을 모으고, 우선순위·마감·현재 상태를 함께 볼 수 있도록 구성했습니다. 어떤 작업을 요청했는지와 그 결과가 어디에 남았는지를 같은 화면에서 따라갈 수 있게 했습니다."
+        "title": "Linear를 쓰며 생각한 AI 프로젝트 관리",
+        "image": "/images/projects/jitdeck-projects.jpg",
+        "intent": "Linear 같은 도구로 프로젝트를 관리해 보면서, AI가 할 일의 정리와 진행 상황 갱신에도 참여하면 관리가 편해지겠다고 생각했습니다. 직접 사용할 관리 방식을 만들기 위해 macOS 앱 개발을 시작했습니다.",
+        "execution": "프로젝트 아래에 이슈와 진행 기록을 모으고, 우선순위·마감·상태를 함께 볼 수 있도록 구성했습니다. 대화에서 등록하거나 갱신한 내용을 앱의 이슈 목록에서도 확인할 수 있게 연결했습니다.",
+        "imageCaption": "현재 사용 중인 Jitdeck의 프로젝트별 이슈 목록"
       },
       {
         "label": "02 / AI Developer Tools",
-        "title": "AI 응답이 끝난 뒤에도 남아 있던 작업",
+        "title": "진행 상황에 맞춰 다음 행동 정하기",
         "image": "",
-        "intent": "초기 구조에서는 AI의 응답이 끝난 뒤 하위 작업이 파일을 수정하거나 테스트하는 동안에도 완료로 보일 수 있었습니다. 이때 화면에 표시된 상태만으로 다음 작업을 결정하기 어려웠습니다.",
-        "execution": "작업과 실행 시도, 프로세스, 이벤트, 검증 결과를 나눠 기록하는 구조로 정리했습니다. Codex 실행 중 발생하는 승인과 질문을 사용자에게 전달하고, 중단·재개·결과 회수도 실행 상태에 맞춰 처리하도록 연결했습니다."
+        "intent": "AI에게 작업을 맡긴 뒤에는 진행 중인지, 내 확인을 기다리는지, 결과를 검토할 차례인지 알 수 있어야 합니다. 작업을 요청한 이후의 과정도 프로젝트 안에서 따라갈 수 있게 했습니다.",
+        "execution": "실행 상태와 승인·질문·결과를 이슈에 연결했습니다. 작업 중 확인이 필요하면 사용자에게 전달하고, 중단한 작업과 검토할 결과를 구분해 다음 행동을 정할 수 있도록 구성했습니다."
       },
       {
         "label": "03 / AI Developer Tools",
@@ -91,8 +93,8 @@ const PROJECTS: Project[] = [
       }
     ],
     "statusNote": "직접 사용하며 출시를 준비하고 있습니다. 오픈소스 공개 방식도 검토 중입니다.",
-    "image": "",
-    "imageLabel": "",
+    "image": "/images/projects/jitdeck-projects.jpg",
+    "imageLabel": "macOS 앱 · 이슈 목록",
     "accent": "AI Developer Tools"
   },
   {
@@ -114,8 +116,8 @@ const PROJECTS: Project[] = [
       "Supabase"
     ],
     "status": "출시 · 후속 개발",
-    "imageLabel": "Workout plan",
-    "image": "/images/hero-aquach-card.png",
+    "imageLabel": "SoomchaSwim · 개발 중인 운동 상세",
+    "image": "/images/projects/soomchaswim-workout.png",
     "logo": "/images/logo-aquach.png",
     "accent": "AI + Fitness",
     "links": [
@@ -130,16 +132,18 @@ const PROJECTS: Project[] = [
       {
         "label": "01 / AI Swim Training App",
         "title": "수영장에서 필요한 정보부터 정하기",
-        "image": "",
+        "image": "/images/detail/aquach-dashboard.png",
         "intent": "초급자에게는 운동을 시작할 수 있는 안내가 필요하고, 숙련자에게는 자세와 기록에 기반한 구체적인 피드백이 중요했습니다. 수영장에서는 운동 중에 휴대폰을 오래 조작하기도 어렵습니다.",
-        "execution": "Aquach에서 수준·목표·선호 영법·최근 기록을 기준으로 운동 계획을 구성하고, 오늘의 계획과 수행 기록을 확인하는 흐름을 만들었습니다. React Native·TypeScript로 앱을 구현하고 Supabase와 iOS 기능을 연결했습니다."
+        "execution": "Aquach에서 수준·목표·선호 영법·최근 기록을 기준으로 운동 계획을 구성하고, 오늘의 계획과 수행 기록을 확인하는 흐름을 만들었습니다. React Native·TypeScript로 앱을 구현하고 Supabase와 iOS 기능을 연결했습니다.",
+        "imageCaption": "Aquach의 기존 앱 화면 · 운동 계획과 기록 진입"
       },
       {
         "label": "02 / AI Swim Training App",
         "title": "오늘의 운동에서 여러 주의 훈련으로",
-        "image": "",
+        "image": "/images/projects/soomchaswim-workout.png",
         "intent": "SoomchaSwim에서는 한 번의 운동 이후에도 훈련을 이어갈 수 있도록 다회차 프로그램을 개발하고 있습니다. 사용자는 수준과 템플릿을 정한 뒤 장비, 주당 횟수와 선호 요일을 입력합니다.",
-        "execution": "생성한 개인 프로그램에서 예정된 세션을 열어 운동하고, 기록을 남겨 진행 상황을 확인합니다. 주당 일정과 세션 난이도를 함께 다루고, 운동을 수행한 결과가 프로그램 안에 남도록 구성했습니다."
+        "execution": "생성한 개인 프로그램에서 예정된 세션을 열어 운동하고, 기록을 남겨 진행 상황을 확인합니다. 주당 일정과 세션 난이도를 함께 다루고, 운동을 수행한 결과가 프로그램 안에 남도록 구성했습니다.",
+        "imageCaption": "SoomchaSwim 개발 화면 · 프로그램에서 연 운동 상세"
       },
       {
         "label": "03 / AI Swim Training App",
@@ -164,7 +168,8 @@ const PROJECTS: Project[] = [
         "images": [
           "/images/detail/aquach-calendar.png",
           "/images/detail/aquach-record-summary.png"
-        ]
+        ],
+        "imageCaption": "Aquach의 기존 앱 화면 · 캘린더, 기록과 Watch 연동"
       }
     ],
     "statusNote": "Aquach는 App Store에 출시했습니다. SoomchaSwim은 후속 개발 버전이며, 아래에서 두 버전의 내용을 구분했습니다."
@@ -198,16 +203,18 @@ const PROJECTS: Project[] = [
       {
         "label": "02 / Korean LLM Research",
         "title": "실험 조건을 다시 확인할 수 있는 구성",
-        "image": "",
+        "image": "/images/projects/research-experiment-flow.png",
         "intent": "AI말평 데이터를 학습·평가 입력으로 변환하고, 한국어 LLM의 기본 응답과 프롬프트 변경, LoRA 미세조정을 비교했습니다. EXAONE·Qwen·Gemma 계열을 사용해 실험을 진행했습니다.",
-        "execution": "모델과 어댑터, 데이터 경로, 입력 형식과 생성 설정을 실행별로 기록했습니다. 최종 응답은 자동으로 검사할 수 있는 라벨 형식으로 정리하고, 예측 원문을 보존해 어떤 문맥에서 판단이 달라졌는지 추적했습니다."
+        "execution": "모델과 어댑터, 데이터 경로, 입력 형식과 생성 설정을 실행별로 기록했습니다. 최종 응답은 자동으로 검사할 수 있는 라벨 형식으로 정리하고, 예측 원문을 보존해 어떤 문맥에서 판단이 달라졌는지 추적했습니다.",
+        "imageCaption": "졸업 연구 발표 자료에 정리한 실험과 데이터 보강 흐름"
       },
       {
         "label": "03 / Korean LLM Research",
         "title": "오답을 유형으로 나눠 다음 실험 정하기",
-        "image": "",
+        "image": "/images/projects/research-error-cases.png",
         "intent": "다른 사람의 말을 인용하거나 문제를 제기한 발화가 부적절로 잘못 분류되는 사례를 확인했습니다. 오탐과 미탐을 모아 문제 제기, 직접 공격, 일반 비판, 인격 비하, 인용 등으로 나눴습니다.",
-        "execution": "반복되는 오류를 기준으로 학습 자료를 보강하고 입력 구성을 바꿨습니다. 문장의 표면 표현, 맥락상 역할, 상대에게 미치는 효과를 구분해 제공하는 방식도 실험했습니다."
+        "execution": "반복되는 오류를 기준으로 학습 자료를 보강하고 입력 구성을 바꿨습니다. 문장의 표면 표현, 맥락상 역할, 상대에게 미치는 효과를 구분해 제공하는 방식도 실험했습니다.",
+        "imageCaption": "연구 포스터에 정리한 오류 유형과 해석 · 원문 자료"
       },
       {
         "label": "04 / Korean LLM Research",
@@ -225,8 +232,8 @@ const PROJECTS: Project[] = [
       }
     ],
     "statusNote": "학습 실험과 오류 분석을 수행하고 졸업 연구 문서로 정리했습니다.",
-    "image": "",
-    "imageLabel": "",
+    "image": "/images/projects/research-experiment-flow.png",
+    "imageLabel": "졸업 연구 · 실험 흐름 자료",
     "accent": "Korean LLM Research"
   },
   {
@@ -253,16 +260,18 @@ const PROJECTS: Project[] = [
       {
         "label": "01 / Local Voice AI",
         "title": "짧게 말하고 다음 말을 이어가기",
-        "image": "",
+        "image": "/images/projects/kiwijju-conversation.png",
         "intent": "대화 모델에는 A2 수준의 짧은 응답과 한 번에 한 질문을 요청합니다. 학습자의 관심사와 일상 주제를 반영하고, 최근에 다룬 주제가 반복되지 않도록 대화 시작 정보를 구성합니다.",
-        "execution": "새 대화를 시작할 때는 최근 주제와 복습할 단어를 읽어 구체적인 상황과 질문을 만듭니다. 사용자가 말한 내용에 다음 질문이 이어지도록 자유 대화 흐름을 정리했습니다."
+        "execution": "새 대화를 시작할 때는 최근 주제와 복습할 단어를 읽어 구체적인 상황과 질문을 만듭니다. 사용자가 말한 내용에 다음 질문이 이어지도록 자유 대화 흐름을 정리했습니다.",
+        "imageCaption": "개발 중인 대화 화면 · 사용자의 음성을 전송하는 상태"
       },
       {
         "label": "02 / Local Voice AI",
         "title": "대화 후에 내가 쓴 표현 돌아보기",
-        "image": "",
+        "image": "/images/projects/kiwijju-feedback.png",
         "intent": "말하는 동안에는 뜻을 전하고 답을 이어가는 데 집중하도록 구성했습니다. 사용자가 도움을 요청하거나 이해에 문제가 생기는 상황에는 필요한 설명을 제공합니다.",
-        "execution": "대화가 끝나면 실제로 사용한 문장에서 수정할 부분과 자연스러운 표현을 정리하고, 단어·문장을 다시 연습할 수 있게 했습니다. 최근에는 고정 커리큘럼을 정리하고 자유 대화와 표현장 음성 복습에 집중하도록 방향을 조정했습니다."
+        "execution": "대화가 끝나면 실제로 사용한 문장에서 수정할 부분과 자연스러운 표현을 정리하고, 단어·문장을 다시 연습할 수 있게 했습니다. 최근에는 고정 커리큘럼을 정리하고 자유 대화와 표현장 음성 복습에 집중하도록 방향을 조정했습니다.",
+        "imageCaption": "개발 중인 대화 정리 화면 · 해당 대화의 표현과 다시 말하기"
       },
       {
         "label": "03 / Local Voice AI",
@@ -287,8 +296,8 @@ const PROJECTS: Project[] = [
       }
     ],
     "statusNote": "TestFlight 배포와 본인 기기 설치를 마쳤습니다. 실제 iPhone의 음성 대화와 외부 이동통신 환경을 확인할 단계입니다.",
-    "image": "",
-    "imageLabel": "",
+    "image": "/images/projects/kiwijju-conversation.png",
+    "imageLabel": "KiwiJju · 음성 대화 개발 화면",
     "accent": "Local Voice AI"
   },
   {
@@ -313,9 +322,10 @@ const PROJECTS: Project[] = [
       {
         "label": "01 / Travel Journal",
         "title": "동행한 하루가 기록에 남도록",
-        "image": "",
+        "image": "/images/projects/jujulog-trip.png",
         "intent": "주주로그에서는 반려견과 함께한 시간을 기록의 중심에 뒀습니다. 시작·진행·완료 화면에 반려견 이름을 사용하고, 경로와 사진을 한 여행 안에서 다시 볼 수 있도록 구성했습니다.",
-        "execution": "사용자는 관광 장소를 탐색해 여행을 시작하고, 이동 중 사진을 추가한 뒤 여행을 마쳐 저장합니다. 저장된 여행은 지도와 사진으로 다시 보거나, 배경과 문구를 편집한 여행카드로 공유할 수 있습니다."
+        "execution": "사용자는 관광 장소를 탐색해 여행을 시작하고, 이동 중 사진을 추가한 뒤 여행을 마쳐 저장합니다. 저장된 여행은 지도와 사진으로 다시 보거나, 배경과 문구를 편집한 여행카드로 공유할 수 있습니다.",
+        "imageCaption": "시뮬레이터에서 저장한 여행 · 검증용 경로와 사진을 사용한 화면"
       },
       {
         "label": "02 / Travel Journal",
@@ -327,9 +337,10 @@ const PROJECTS: Project[] = [
       {
         "label": "03 / Travel Journal",
         "title": "관광정보를 탐색과 기록에 활용하기",
-        "image": "",
+        "image": "/images/projects/jujulog-explore.png",
         "intent": "여행을 기록하기 전에 갈 장소를 찾고, 장소의 소개와 이용 정보를 확인할 수 있도록 일반 관광정보 API를 연동했습니다. 키워드·지역·카테고리 조건으로 검색하고 상세 화면으로 이어집니다.",
-        "execution": "외부 응답을 앱에서 사용하는 장소 형태로 정리해 로컬에 저장하고, 기존에 저장한 정보가 유지되도록 처리했습니다. 관광지 상세 이미지는 여행 사진과 함께 여행카드의 배경 자료로 활용할 수 있게 했습니다."
+        "execution": "외부 응답을 앱에서 사용하는 장소 형태로 정리해 로컬에 저장하고, 기존에 저장한 정보가 유지되도록 처리했습니다. 관광지 상세 이미지는 여행 사진과 함께 여행카드의 배경 자료로 활용할 수 있게 했습니다.",
+        "imageCaption": "앱 검증에 사용한 장소 탐색 화면"
       },
       {
         "label": "04 / Travel Journal",
@@ -347,8 +358,8 @@ const PROJECTS: Project[] = [
       }
     ],
     "statusNote": "App Store에 출시했습니다. 현재 공개 버전은 1.0.1이며, 장소 탐색·상세 수정과 OTA 구성을 포함한 iOS 배포를 진행했습니다.",
-    "image": "",
-    "imageLabel": "",
+    "image": "/images/projects/jujulog-explore.png",
+    "imageLabel": "주주로그 · 장소 탐색 화면",
     "accent": "Travel Journal",
     "links": [
       {
@@ -380,9 +391,10 @@ const PROJECTS: Project[] = [
       {
         "label": "01 / AI Game Systems",
         "title": "마을의 생활과 항해가 이어지는 세계",
-        "image": "",
+        "image": "/images/projects/gamzasaga-village.png",
         "intent": "주민이 먹고 쉬고 일하는 생활 위에 건설·연구·제작과 선박 준비, 원정을 쌓는 구조입니다. 본진에 남은 주민과 원정대가 같은 시간 속에서 움직이도록 설계했습니다.",
-        "execution": "현재 정착, 선박과 항해, 상륙·교역·귀환 경로를 구현하고 있습니다. 주민과 물자, 작업·항해 상태를 저장해 중간에 멈춘 세계를 이어갈 수 있도록 구성했습니다."
+        "execution": "현재 정착, 선박과 항해, 상륙·교역·귀환 경로를 구현하고 있습니다. 주민과 물자, 작업·항해 상태를 저장해 중간에 멈춘 세계를 이어갈 수 있도록 구성했습니다.",
+        "imageCaption": "개발 중인 게임의 마을과 주민 상세 화면"
       },
       {
         "label": "02 / AI Game Systems",
@@ -394,9 +406,10 @@ const PROJECTS: Project[] = [
       {
         "label": "03 / AI Game Systems",
         "title": "모델이 고른 행동을 게임의 작업으로",
-        "image": "",
+        "image": "/images/projects/gamzasaga-gemma-check.png",
         "intent": "최근에는 주민의 성격·기억·목표를 입력해 행동을 선택하게 하고, 선택 결과를 실제 이동과 건설 작업에 연결했습니다. 게임이 현재 상태에서 실행할 수 있는 선택인지 확인하는 단계가 필요했습니다.",
-        "execution": "응답 형식, 허용 행동과 근거, 요청 유효기간, 주민과 대상의 상태를 검사합니다. 한 번 적용한 요청은 소비하고, 늦거나 중복된 응답은 거부합니다. iOS Simulator에서 실제 추론을 작업 완료와 저장 복원까지 연결해 확인했습니다."
+        "execution": "응답 형식, 허용 행동과 근거, 요청 유효기간, 주민과 대상의 상태를 검사합니다. 한 번 적용한 요청은 소비하고, 늦거나 중복된 응답은 거부합니다. iOS Simulator에서 실제 추론을 작업 완료와 저장 복원까지 연결해 확인했습니다.",
+        "imageCaption": "별도 시뮬레이터 검수본 · 모델의 선택을 실제 작업과 연결한 화면"
       },
       {
         "label": "04 / AI Game Systems",
@@ -407,8 +420,8 @@ const PROJECTS: Project[] = [
       }
     ],
     "statusNote": "개발 중입니다. 최근 AI 행동 연결은 iOS Simulator의 별도 검수 앱에서 확인했으며, 실기기와 장기 플레이 검증을 이어갈 예정입니다.",
-    "image": "",
-    "imageLabel": "",
+    "image": "/images/projects/gamzasaga-village.png",
+    "imageLabel": "GamzaSaga · 개발 중인 마을",
     "accent": "AI Game Systems"
   },
   {
@@ -430,8 +443,8 @@ const PROJECTS: Project[] = [
       "MMKV"
     ],
     "status": "출시",
-    "imageLabel": "Push stories",
-    "image": "/images/hero-nootify-card.png",
+    "imageLabel": "Nootify · 이야기와 학습 기록",
+    "image": "/images/detail/nootify-home-dashboard.png",
     "logo": "/images/logo-nootify.png",
     "accent": "Language, Story",
     "links": [
@@ -447,28 +460,32 @@ const PROJECTS: Project[] = [
         "title": "알림이 학습의 첫 화면이 되도록",
         "image": "/images/detail/nootify-notification-entry.png",
         "intent": "알림 안에 상황 문장과 선택지를 넣고, 사용자의 선택이 다음 장면으로 이어지도록 구성했습니다. 한 번의 학습을 짧게 끝내고 다음 이야기를 기다릴 수 있는 흐름을 목표로 했습니다.",
-        "execution": "즉시 진행, 간격을 둔 진행, 정해진 시간의 알림 예약을 지원합니다. 앱 안에서는 지나간 이야기와 선택 기록, 저장한 표현을 다시 확인할 수 있습니다."
+        "execution": "즉시 진행, 간격을 둔 진행, 정해진 시간의 알림 예약을 지원합니다. 앱 안에서는 지나간 이야기와 선택 기록, 저장한 표현을 다시 확인할 수 있습니다.",
+        "imageCaption": "Nootify 앱 화면 · 알림이 학습의 첫 화면이 되도록"
       },
       {
         "label": "02 / Push-based Language Learning",
         "title": "이야기를 읽어야 선택할 수 있는 구조",
         "image": "/images/detail/nootify-story-choice.png",
         "intent": "이야기마다 체력·신뢰도 같은 스탯과 분기, 실패·엔딩 조건을 정의했습니다. 사용자의 선택이 어떤 결과를 만드는지 문장 안에서 파악하도록 콘텐츠를 구성했습니다.",
-        "execution": "스토리 JSON에 장면·선택지·효과·조건을 저장하고, 공통 엔진이 분기와 스탯 변화를 계산합니다. 난이도별 문장을 같은 구조로 다루고, 새로운 이야기의 규칙을 데이터로 추가할 수 있게 했습니다."
+        "execution": "스토리 JSON에 장면·선택지·효과·조건을 저장하고, 공통 엔진이 분기와 스탯 변화를 계산합니다. 난이도별 문장을 같은 구조로 다루고, 새로운 이야기의 규칙을 데이터로 추가할 수 있게 했습니다.",
+        "imageCaption": "Nootify 앱 화면 · 이야기를 읽어야 선택할 수 있는 구조"
       },
       {
         "label": "03 / Push-based Language Learning",
         "title": "낯선 표현을 문맥과 함께 기억하기",
         "image": "/images/detail/nootify-vocabulary.png",
         "intent": "모르는 단어를 저장할 때는 그 표현이 나온 장면과 함께 다시 볼 수 있도록 했습니다. 사용자가 의미를 추론하고 확인하는 과정이 이야기 읽기 안에 남도록 단어장과 유의어 기능을 구성했습니다.",
-        "execution": "영어 표현은 Datamuse로 유의어를 조회하고 주변 문맥을 요청에 포함합니다. 조회 시간이 길어지거나 네트워크 오류가 나면 빈 결과로 마무리해 이야기 진행을 계속할 수 있게 했습니다."
+        "execution": "영어 표현은 Datamuse로 유의어를 조회하고 주변 문맥을 요청에 포함합니다. 조회 시간이 길어지거나 네트워크 오류가 나면 빈 결과로 마무리해 이야기 진행을 계속할 수 있게 했습니다.",
+        "imageCaption": "Nootify 앱 화면 · 낯선 표현을 문맥과 함께 기억하기"
       },
       {
         "label": "04 / Push-based Language Learning",
         "title": "앱이 꺼져 있어도 이어지는 진행 상태",
         "image": "/images/detail/nootify-history-timeline.png",
         "intent": "알림 버튼에서 고른 선택도 진행 위치와 스탯, 다음 알림에 반영돼야 합니다. 알림 이벤트를 처리할 때 저장된 상태와 이야기 데이터를 불러와 선택 결과를 계산합니다.",
-        "execution": "진행 위치·선택·엔딩·단어장을 Zustand와 MMKV에 저장합니다. 앱 재시작 시 진행 중인 이야기의 예약 알림이 없으면 현재 위치를 기준으로 다시 예약하도록 복구 경로를 구현했습니다."
+        "execution": "진행 위치·선택·엔딩·단어장을 Zustand와 MMKV에 저장합니다. 앱 재시작 시 진행 중인 이야기의 예약 알림이 없으면 현재 위치를 기준으로 다시 예약하도록 복구 경로를 구현했습니다.",
+        "imageCaption": "Nootify 앱 화면 · 앱이 꺼져 있어도 이어지는 진행 상태"
       }
     ],
     "statusNote": "App Store에 출시한 개인 프로젝트입니다. 상세의 엔진·복구 설명은 현재 개발 소스를 기준으로 정리했습니다."
@@ -490,8 +507,8 @@ const PROJECTS: Project[] = [
       "HealthKit"
     ],
     "status": "개발 중",
-    "imageLabel": "Fitness loop",
-    "image": "/images/hero-soomcha-card.png",
+    "imageLabel": "Soomcha · 개발 중인 마을",
+    "image": "/images/projects/soomcha-village.png",
     "logo": "/images/logo-soomcha.png",
     "accent": "Fitness + Gamification",
     "statusNote": "비공개로 개발 중입니다. 장소 선택·종목별 성장·밤 정산은 다음 개발 범위로 구분했습니다.",
@@ -500,9 +517,10 @@ const PROJECTS: Project[] = [
       {
         "label": "01 / Gamified Mobile Product",
         "title": "운동한 결과가 캐릭터에 쌓이도록",
-        "image": "",
+        "image": "/images/projects/soomcha-village.png",
         "intent": "운동 기록을 동기화하면 Calo를 받고, 몸치를 수집하고 교감하는 흐름을 구현했습니다. 캐릭터별 모습과 성격, 친밀도가 생활 공간의 반응으로 드러나도록 구성하고 있습니다.",
-        "execution": "현재 앱에서는 보유한 몸치가 마을에서 움직이는 모습을 확인할 수 있습니다. 캐릭터의 동작과 화면 반영을 시뮬레이터에서 비교하며, 활동 기록과 성장 경험을 함께 다듬고 있습니다."
+        "execution": "현재 앱에서는 보유한 몸치가 마을에서 움직이는 모습을 확인할 수 있습니다. 캐릭터의 동작과 화면 반영을 시뮬레이터에서 비교하며, 활동 기록과 성장 경험을 함께 다듬고 있습니다.",
+        "imageCaption": "시뮬레이터 실행 화면 · 활동 요약과 마을의 주민"
       },
       {
         "label": "02 / Gamified Mobile Product",
@@ -543,8 +561,8 @@ const PROJECTS: Project[] = [
       "Figma"
     ],
     "status": "팀 프로젝트",
-    "imageLabel": "NPC dialogue",
-    "image": "",
+    "imageLabel": "Talkisland · 팀 프로젝트 실행 화면",
+    "image": "/images/detail/talkisland-gameplay.png",
     "logo": "/images/logo-talkisland.png",
     "accent": "AI Speaking",
     "statusNote": "Microsoft AI School 6기 팀 프로젝트로 최종 프로젝트 최우수상을 받았습니다.",
@@ -553,16 +571,18 @@ const PROJECTS: Project[] = [
       {
         "label": "01 / AI Conversation Learning",
         "title": "상황이 대화의 목적을 만들도록",
-        "image": "",
+        "image": "/images/detail/talkisland-gameplay.png",
         "intent": "사용자가 장면 안에서 무엇을 해야 하는지 알 수 있고, 그 목적에 맞는 말을 NPC에게 건넬 수 있도록 회화 상황을 구성했습니다. 각 NPC의 역할과 캐릭터 설정을 대화 시나리오에 반영했습니다.",
-        "execution": "AI 응답이 해당 장면과 학습 맥락 안에서 이어지도록 대화 흐름을 설계했습니다. 맵 에셋과 회화 상황 구성을 함께 다루며 텍스트와 공간이 같은 상황을 설명하도록 작업했습니다."
+        "execution": "AI 응답이 해당 장면과 학습 맥락 안에서 이어지도록 대화 흐름을 설계했습니다. 맵 에셋과 회화 상황 구성을 함께 다루며 텍스트와 공간이 같은 상황을 설명하도록 작업했습니다.",
+        "imageCaption": "팀 프로젝트 실행 화면 · 상황 속 NPC와 대화"
       },
       {
         "label": "02 / AI Conversation Learning",
         "title": "팀 안에서 맡은 역할과 결과",
-        "image": "",
+        "image": "/images/detail/talkisland-editor.png",
         "intent": "NPC 대화 스크립트·캐릭터 설정·회화 흐름을 담당하고 에셋 제작에 참여했습니다. 시연에서 사용자가 경험할 장면을 기준으로 팀의 구현과 콘텐츠를 맞췄습니다.",
-        "execution": "NPC의 설정, 대화의 목적, 사용자가 이동하는 장면을 함께 정리했습니다. 팀이 구현할 수 있는 시연 흐름에 맞춰 시나리오와 에셋 구성을 완성하는 경험을 쌓았습니다."
+        "execution": "NPC의 설정, 대화의 목적, 사용자가 이동하는 장면을 함께 정리했습니다. 팀이 구현할 수 있는 시연 흐름에 맞춰 시나리오와 에셋 구성을 완성하는 경험을 쌓았습니다.",
+        "imageCaption": "팀 프로젝트의 Unity 편집 화면"
       }
     ]
   }
@@ -582,6 +602,24 @@ const ABOUT_POINTS = [
     meta: "2024.12 ~ 2025.06 / 최종 프로젝트 최우수상",
   },
 ];
+
+function ProjectPreview({ project }: { project: Project }) {
+  return (
+    <figure className="mb-6 overflow-hidden rounded-[18px] border border-[#E5E5EA] bg-[#F5F5F7]">
+      <div className="flex h-[260px] items-center justify-center p-4 sm:h-[290px]">
+        <img
+          src={project.image}
+          alt={`${project.title} — ${project.imageLabel}`}
+          loading="lazy"
+          className="max-h-full max-w-full rounded-[8px] object-contain shadow-[0_6px_24px_rgba(15,23,42,0.10)]"
+        />
+      </div>
+      <figcaption className="border-t border-[#E5E5EA] bg-white px-4 py-2.5 text-[11px] leading-relaxed text-[#6E6E73]">
+        {project.imageLabel}
+      </figcaption>
+    </figure>
+  );
+}
 
 const getSectionImages = (section: PlanningSection) =>
   section.images?.length ? section.images : section.image ? [section.image] : [];
@@ -749,7 +787,7 @@ export default function App() {
 
             <div className="mt-10 max-w-xl">
               <p className="hero-copy max-w-[340px] text-[18px] font-semibold leading-[1.5] text-[#1D1D1F] sm:max-w-xl sm:text-[20px] lg:text-[24px] break-keep">
-                수영·언어 학습 앱과 AI 개발 도구를 만듭니다.
+                왜 만드는지, 어떻게 쓰일지 생각하며 개발합니다.
               </p>
               <p className="hero-copy mt-4 mb-7 max-w-[330px] text-[13px] leading-[1.75] text-[#6E6E73] sm:max-w-md sm:text-[14px] lg:text-[15px] break-keep">
                 수영강사로 일하며 겪은 문제와 언어학을 공부하며 생긴 질문을 앱과 연구로 옮겼습니다. 직접 사용하고 살펴본 결과를 다음 개발에 반영합니다.
@@ -804,7 +842,7 @@ export default function App() {
                     : ""
                 }`}
               >
-                <div className="mb-10 flex items-start justify-between gap-5">
+                <div className="mb-6 flex min-h-16 items-start justify-between gap-5">
                   {project.logo && (
                     <div className="grid h-16 w-16 shrink-0 place-items-center overflow-hidden rounded-[18px] bg-[#F5F5F7] shadow-[0_14px_34px_rgba(15,23,42,0.12)] ring-1 ring-[#E5E5EA] transition-colors duration-300 group-hover:ring-[#E60012]/25">
                       <img src={project.logo} alt={`${project.title} logo`} className="h-full w-full object-cover" />
@@ -814,6 +852,8 @@ export default function App() {
                     {project.status}
                   </span>
                 </div>
+
+                <ProjectPreview project={project} />
 
                 <div className="flex flex-1 flex-col">
                   <div className="mb-4 flex items-start justify-between gap-4">
@@ -893,7 +933,7 @@ export default function App() {
                     : ""
                 }`}
               >
-                <div className="mb-8 flex items-start justify-between gap-4">
+                <div className="mb-5 flex min-h-12 items-start justify-between gap-4">
                   {project.logo && (
                     <div className="grid h-12 w-12 shrink-0 place-items-center overflow-hidden rounded-[14px] bg-[#F5F5F7] shadow-[0_10px_26px_rgba(15,23,42,0.1)] ring-1 ring-[#E5E5EA] transition-colors duration-300 group-hover:ring-[#E60012]/25">
                       <img src={project.logo} alt={`${project.title} logo`} className="h-full w-full object-cover" />
@@ -903,6 +943,8 @@ export default function App() {
                     {project.status}
                   </span>
                 </div>
+
+                <ProjectPreview project={project} />
 
                 <div className="flex flex-1 flex-col">
                   <div style={MONO} className="mb-3 text-[10px] uppercase tracking-[0.18em] text-[#E60012] transition-colors duration-300">
@@ -1040,29 +1082,36 @@ export default function App() {
                   {selectedProject.planningSections?.map((section) => (
                     <article
                       key={`${selectedProject.id}-${section.title}`}
-                      className="overflow-hidden rounded-[22px] border border-[#D2D2D7] bg-[#FBFBFD] shadow-[0_14px_42px_rgba(15,23,42,0.07)]"
+                      className={`overflow-hidden rounded-[22px] border border-[#D2D2D7] bg-[#FBFBFD] shadow-[0_14px_42px_rgba(15,23,42,0.07)] ${getSectionImages(section).length ? "lg:col-span-2" : ""}`}
                     >
-                      <div className={getSectionImages(section).length ? "grid min-h-full md:grid-cols-[0.92fr_1fr] lg:grid-cols-1 xl:grid-cols-[0.92fr_1fr]" : "grid min-h-full"}>
-                        {getSectionImages(section).length > 0 && <div className="flex min-h-[300px] items-center justify-center overflow-hidden border-b border-[#E5E5EA] bg-[#F5F5F7] p-3 md:border-b-0 md:border-r lg:border-b lg:border-r-0 xl:border-b-0 xl:border-r">
-                          {getSectionImages(section).length > 1 ? (
-                            <div className="grid w-full grid-cols-2 gap-2">
+                      <div className={getSectionImages(section).length ? "grid min-h-full md:grid-cols-[1fr_1fr]" : "grid min-h-full"}>
+                        {getSectionImages(section).length > 0 && (
+                          <figure className="flex min-w-0 flex-col justify-center gap-3 border-b border-[#E5E5EA] bg-[#F5F5F7] p-4 md:border-b-0 md:border-r sm:p-6">
+                            <div className={getSectionImages(section).length > 1 ? "grid w-full grid-cols-2 items-center gap-3" : "flex items-center justify-center"}>
                               {getSectionImages(section).map((image, imageIndex) => (
-                                <img
+                                <a
                                   key={`${selectedProject.id}-${section.label}-image-${imageIndex}`}
-                                  src={image}
-                                  alt={`${selectedProject.title} ${section.title} 화면`}
-                                  className="max-h-[430px] w-auto max-w-full rounded-[16px] object-contain shadow-[0_12px_36px_rgba(15,23,42,0.12)]"
-                                />
+                                  href={image}
+                                  target="_blank"
+                                  rel="noreferrer"
+                                  aria-label={`${selectedProject.title} ${section.title} 이미지 ${imageIndex + 1} 원본 보기`}
+                                  className="flex min-w-0 justify-center rounded-[12px] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#E60012]"
+                                >
+                                  <img
+                                    src={image}
+                                    alt={section.imageCaption || `${selectedProject.title} ${section.title} 화면`}
+                                    loading="lazy"
+                                    className="max-h-[460px] max-w-full rounded-[10px] object-contain shadow-[0_8px_28px_rgba(15,23,42,0.12)]"
+                                  />
+                                </a>
                               ))}
                             </div>
-                          ) : (
-                            <img
-                              src={section.image}
-                              alt={`${selectedProject.title} ${section.title} 화면`}
-                              className="max-h-[430px] w-auto max-w-full rounded-[16px] object-contain shadow-[0_12px_36px_rgba(15,23,42,0.12)]"
-                            />
-                          )}
-                        </div>}
+                            <figcaption className="text-center text-[11px] leading-relaxed text-[#6E6E73]">
+                              {section.imageCaption || `${selectedProject.title} 앱 화면`}
+                              <span className="mt-1 block text-[#86868B]">이미지를 누르면 원본을 볼 수 있습니다.</span>
+                            </figcaption>
+                          </figure>
+                        )}
 
                         <div className="p-5 sm:p-6">
                           <div style={MONO} className="mb-2 text-[10px] uppercase tracking-[0.18em] text-[#E60012]">
@@ -1099,7 +1148,7 @@ export default function App() {
             <div className="mt-7 max-w-2xl space-y-4 break-keep text-[15px] leading-[1.85] text-[#515154]">
               <p>수영강사로 일하면서 사람마다 운동 목표와 필요한 안내가 다르다는 점을 경험했습니다. 혼자 수영할 때도 훈련 계획을 세우고 기록을 돌아볼 수 있도록 Aquach를 만들었고, 현재는 SoomchaSwim으로 발전시키고 있습니다.</p>
               <p>언어학과 언어정보처리를 공부하며 문맥이 의미와 판단에 미치는 영향에 관심을 가졌습니다. 졸업 연구에서는 한국어 대화의 부적절 발언 탐지를 다뤘고, Talkisland·Nootify·KiwiJju에서는 이야기와 대화를 통해 외국어를 접하는 경험을 만들었습니다.</p>
-              <p>여러 프로젝트를 병행하며 작업 기록과 AI 실행을 관리할 필요가 생겨 Jitdeck을 개발하고 있습니다. 프로젝트마다 실제로 사용할 상황을 정하고, 화면·데이터·실행 과정이 그 상황에 맞게 이어지는지 확인하며 작업합니다.</p>
+              <p>Linear 같은 도구를 사용하며 AI를 프로젝트 관리에 더 적극적으로 활용하고 싶어 Jitdeck을 만들기 시작했습니다. 프로젝트마다 왜 필요한지와 어떻게 쓰일지를 생각하고, 직접 사용하며 확인한 내용을 다음 개발에 반영합니다.</p>
             </div>
           </div>
 
