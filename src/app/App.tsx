@@ -676,10 +676,10 @@ export default function App() {
 
             <div className="mt-10 max-w-xl">
               <p className="hero-copy max-w-[340px] text-[18px] font-semibold leading-[1.5] text-[#1D1D1F] sm:max-w-xl sm:text-[20px] lg:text-[24px] break-keep">
-                기능을 정할 때, 실제로 쓸 상황부터 생각합니다.
+                App &amp; AI Developer
               </p>
               <p className="hero-copy mt-4 mb-7 max-w-[330px] text-[13px] leading-[1.75] text-[#6E6E73] sm:max-w-md sm:text-[14px] lg:text-[15px] break-keep">
-                수영강사로 일하며 훈련 계획 앱 Aquach를 만들었습니다. Linear를 사용하며 떠올린 AI 프로젝트 관리 방식은 Jitdeck으로 개발하고 있습니다.
+                모바일 앱 · LLM 미세조정 및 평가 · 온디바이스 AI
               </p>
               <div style={MONO} className="hero-contact flex flex-col gap-2 border-l-2 border-[#E60012] pl-4 text-[12px] tracking-[0.08em] text-[#6E6E73]">
                 <span className="font-sans text-[13px] font-semibold tracking-[0.02em] text-[#1D1D1F]">황경상</span>
