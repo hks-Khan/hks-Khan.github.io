@@ -38,6 +38,7 @@ type Project = {
 const PROJECTS: Project[] = [
   {
     "id": "01",
+    "logo": "/images/logo-jitdeck.png",
     "title": "Jitdeck",
     "subtitle": "AI Developer Tools",
     "status": "개발 중",
@@ -202,6 +203,7 @@ const PROJECTS: Project[] = [
   },
   {
     "id": "04",
+    "logo": "/images/logo-kiwijju.png",
     "title": "KiwiJju",
     "subtitle": "Local Voice AI",
     "status": "베타 테스트",
@@ -252,6 +254,7 @@ const PROJECTS: Project[] = [
   },
   {
     "id": "05",
+    "logo": "/images/logo-jujulog.png",
     "title": "주주로그",
     "subtitle": "Travel Journal",
     "status": "출시",
@@ -306,6 +309,7 @@ const PROJECTS: Project[] = [
   },
   {
     "id": "06",
+    "logo": "/images/logo-gamzasaga.png",
     "title": "GamzaSaga",
     "subtitle": "AI Game Systems",
     "status": "개발 중",
@@ -980,13 +984,13 @@ export default function App() {
           role="presentation"
         >
           <section
-            className="mx-auto w-full max-w-3xl rounded-[30px] border border-[#D2D2D7] bg-white shadow-[0_36px_120px_rgba(15,23,42,0.28)]"
+            className="mx-auto w-full max-w-6xl rounded-[30px] border border-[#D2D2D7] bg-white shadow-[0_36px_120px_rgba(15,23,42,0.28)]"
             onClick={(event) => event.stopPropagation()}
             role="dialog"
             aria-modal="true"
             aria-labelledby="project-detail-title"
           >
-            <div className="sticky top-0 z-10 flex flex-wrap items-start justify-between gap-4 border-b border-[#E5E5EA] bg-white/92 px-5 py-4 backdrop-blur-xl sm:px-7">
+            <div className="sticky top-0 z-10 flex items-start justify-between gap-4 border-b border-[#E5E5EA] bg-white/92 px-5 py-4 backdrop-blur-xl sm:px-7">
               <div className="flex min-w-0 items-center gap-3">
                 {selectedProject.logo && (
                   <div className="grid h-12 w-12 shrink-0 place-items-center overflow-hidden rounded-[14px] bg-[#F5F5F7] shadow-[0_10px_26px_rgba(15,23,42,0.1)] ring-1 ring-[#E5E5EA]">
@@ -997,7 +1001,7 @@ export default function App() {
                   <div style={MONO} className="mb-1 text-[10px] uppercase tracking-[0.18em] text-[#E60012]">
                     {selectedProject.id} / {selectedProject.accent}
                   </div>
-                  <h2 id="project-detail-title" className="break-keep text-[21px] font-black leading-[1.2] tracking-[-0.04em] text-[#1D1D1F] sm:text-[28px]">
+                  <h2 id="project-detail-title" className="truncate text-[24px] font-black leading-none tracking-[-0.04em] text-[#1D1D1F] sm:text-[32px]">
                     {selectedProject.title}
                   </h2>
                 </div>
@@ -1021,10 +1025,10 @@ export default function App() {
             <div className="p-5 sm:p-7">
               <div className="rounded-[24px] border border-[#E5E5EA] bg-[#FBFBFD] p-5 shadow-[0_14px_42px_rgba(15,23,42,0.06)] sm:p-6">
                 <div style={MONO} className="mb-3 text-[10px] uppercase tracking-[0.24em] text-[#E60012]">
-                  프로젝트 소개
+                  Product detail
                 </div>
                 <p className="max-w-4xl break-keep text-[16px] font-bold leading-[1.75] text-[#1D1D1F] sm:text-[18px]">
-                  {selectedProject.description}
+                  {selectedProject.detailIntro}
                 </p>
 
                 <p className="mt-5 border-l-2 border-[#E60012] pl-4 text-[14px] leading-[1.75] text-[#515154]">{selectedProject.statusNote}</p>
@@ -1055,6 +1059,70 @@ export default function App() {
                 )}
               </div>
 
+              <div className="mt-6">
+                <div className="mb-4 flex items-end justify-between gap-4 border-t border-[#E5E5EA] pt-6">
+                  <div>
+                    <div style={MONO} className="mb-2 text-[10px] uppercase tracking-[0.24em] text-[#E60012]">
+                      Problem & implementation
+                    </div>
+                    <h3 className="text-[24px] font-black tracking-[-0.04em] text-[#1D1D1F] sm:text-[30px]">
+                      기획과 구현
+                    </h3>
+                  </div>
+                </div>
+
+                <p className="mb-4 text-[12px] text-[#6E6E73]">이미지를 누르면 원본을 볼 수 있습니다.</p>
+                <div className="grid gap-4 lg:grid-cols-2">
+                  {selectedProject.planningSections?.map((section) => (
+                    <article
+                      key={`${selectedProject.id}-${section.title}`}
+                      className={`overflow-hidden rounded-[22px] border border-[#D2D2D7] bg-[#FBFBFD] shadow-[0_14px_42px_rgba(15,23,42,0.07)] ${getSectionImages(section).length ? "lg:col-span-2" : ""}`}
+                    >
+                      <div className={getSectionImages(section).length ? "grid min-h-full md:grid-cols-[1fr_1fr]" : "grid min-h-full"}>
+                        {getSectionImages(section).length > 0 && (
+                          <figure className="flex min-w-0 flex-col justify-center gap-3 border-b border-[#E5E5EA] bg-[#F5F5F7] p-4 md:border-b-0 md:border-r sm:p-6">
+                            <div className={getSectionImages(section).length > 1 ? "grid w-full grid-cols-2 items-center gap-3" : "flex items-center justify-center"}>
+                              {getSectionImages(section).map((image, imageIndex) => (
+                                <a
+                                  key={`${selectedProject.id}-${section.label}-image-${imageIndex}`}
+                                  href={image}
+                                  target="_blank"
+                                  rel="noreferrer"
+                                  aria-label={`${selectedProject.title} ${section.title} 이미지 ${imageIndex + 1} 원본 보기`}
+                                  className="flex min-w-0 justify-center rounded-[12px] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#E60012]"
+                                >
+                                  <img
+                                    src={image}
+                                    alt={section.imageCaption || `${selectedProject.title} ${section.title} 화면`}
+                                    loading="lazy"
+                                    className="max-h-[460px] max-w-full rounded-[10px] object-contain shadow-[0_8px_28px_rgba(15,23,42,0.12)]"
+                                  />
+                                </a>
+                              ))}
+                            </div>
+                            <figcaption className="text-center text-[11px] leading-relaxed text-[#6E6E73]">
+                              {section.imageCaption || `${selectedProject.title} 앱 화면`}
+                            </figcaption>
+                          </figure>
+                        )}
+
+                        <div className="p-5 sm:p-6">
+                          <div style={MONO} className="mb-2 text-[10px] uppercase tracking-[0.18em] text-[#E60012]">
+                            {section.label}
+                          </div>
+                          <h4 className="text-[18px] font-black tracking-[-0.03em] text-[#1D1D1F]">
+                            {section.title}
+                          </h4>
+                          <div className="mt-4 space-y-4 break-keep text-[15px] leading-[1.85] text-[#515154]">
+                            <p>{section.intent}</p>
+                            <p>{section.execution}</p>
+                          </div>
+                        </div>
+                      </div>
+                    </article>
+                  ))}
+                </div>
+              </div>
               <section aria-labelledby="development-logs-title" className="mt-7 border-t border-[#E5E5EA] pt-6">
                 <div className="mb-4 flex items-baseline justify-between gap-4">
                   <h3 id="development-logs-title" className="text-[22px] font-black tracking-[-0.04em]">개발로그</h3>
