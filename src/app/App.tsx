@@ -1150,31 +1150,31 @@ export default function App() {
           role="presentation"
         >
           <section
-            className="mx-auto w-full max-w-6xl rounded-[30px] border border-[#D2D2D7] bg-white shadow-[0_36px_120px_rgba(15,23,42,0.28)]"
+            className="mx-auto w-full max-w-[1040px] rounded-[16px] bg-white shadow-[0_24px_80px_rgba(15,23,42,0.18)]"
             onClick={(event) => event.stopPropagation()}
             role="dialog"
             aria-modal="true"
             aria-labelledby="project-detail-title"
           >
-            <div className="sticky top-0 z-10 flex items-start justify-between gap-4 border-b border-[#E5E5EA] bg-white/92 px-5 py-4 backdrop-blur-xl sm:px-7">
+            <div className="sticky top-0 z-10 flex items-start justify-between gap-3 rounded-t-[16px] border-b border-[#E5E5EA] bg-white/95 px-5 py-5 backdrop-blur-xl sm:px-10 sm:py-7">
               <div className="flex min-w-0 items-center gap-3">
                 {selectedProject.logo && (
-                  <div className="grid h-12 w-12 shrink-0 place-items-center overflow-hidden rounded-[14px] bg-[#F5F5F7] shadow-[0_10px_26px_rgba(15,23,42,0.1)] ring-1 ring-[#E5E5EA]">
+                  <div className="grid h-12 w-12 shrink-0 place-items-center overflow-hidden rounded-[14px] bg-white">
                     <img src={selectedProject.logo} alt={`${selectedProject.title} logo`} className="h-full w-full object-cover" />
                   </div>
                 )}
                 <div className="min-w-0">
-                  <div style={MONO} className="mb-1 text-[10px] uppercase tracking-[0.18em] text-[#E60012]">
-                    {selectedProject.id} / {selectedProject.accent}
+                  <div style={MONO} className="mb-2 text-[10px] uppercase tracking-[0.16em] text-[#86868B]">
+                    {selectedProject.accent}
                   </div>
-                  <h2 id="project-detail-title" className="truncate text-[24px] font-black leading-none tracking-[-0.04em] text-[#1D1D1F] sm:text-[32px]">
+                  <h2 id="project-detail-title" className="break-keep text-[21px] font-semibold leading-[1.3] tracking-[-0.035em] text-[#232326] sm:text-[30px]">
                     {selectedProject.title}
                   </h2>
                 </div>
               </div>
 
-              <div className="flex shrink-0 items-center gap-2">
-                <span style={MONO} className={statusBadgeClass(selectedProject.status, "small")}>
+              <div className="flex shrink-0 flex-col-reverse items-end gap-3 sm:flex-row sm:items-center">
+                <span style={MONO} className="rounded-full bg-[#F3F4F6] px-3 py-2 text-[10px] font-normal text-[#626268] sm:text-[12px]">
                   {selectedProject.status}
                 </span>
                 <button
@@ -1188,20 +1188,20 @@ export default function App() {
               </div>
             </div>
 
-            <div className="p-5 sm:p-7">
-              <div className="rounded-[24px] border border-[#E5E5EA] bg-[#FBFBFD] p-5 shadow-[0_14px_42px_rgba(15,23,42,0.06)] sm:p-6">
-                <div style={MONO} className="mb-3 text-[10px] uppercase tracking-[0.24em] text-[#E60012]">
-                  Product detail
+            <div className="px-5 pb-10 pt-8 sm:px-10 sm:pb-14 sm:pt-10">
+              <div>
+                <div style={MONO} className="mb-4 text-[13px] font-normal text-[#6E6E73]">
+                  프로젝트 소개
                 </div>
-                <p className="max-w-4xl whitespace-pre-line break-keep text-[16px] font-bold leading-[1.75] text-[#1D1D1F] sm:text-[18px]">
+                <p className="max-w-[720px] whitespace-pre-line break-keep text-[16px] font-normal leading-[1.85] text-[#424245]">
                   {selectedProject.detailIntro}
                 </p>
 
-                <p className="mt-5 border-l-2 border-[#E60012] pl-4 text-[14px] leading-[1.75] text-[#515154]">{selectedProject.statusNote}</p>
+                <p className="mt-7 text-[13px] font-normal leading-[1.8] text-[#6E6E73]">{selectedProject.statusNote}</p>
 
                 <div className="mt-5 flex flex-wrap gap-2">
                   {selectedProject.tags.map((tag, tagIndex) => (
-                    <span key={`${selectedProject.id}-detail-tag-${tagIndex}`} className={tagBadgeClass(tag)}>
+                    <span key={`${selectedProject.id}-detail-tag-${tagIndex}`} className="rounded-full border border-[#E5E5EA] bg-[#F7F7F8] px-3 py-1 text-[12px] font-normal text-[#626268]">
                       {tag}
                     </span>
                   ))}
@@ -1215,7 +1215,7 @@ export default function App() {
                         href={link.href}
                         target="_blank"
                         rel="noreferrer"
-                        className="inline-flex items-center gap-1.5 rounded-full bg-[#E60012] px-3 py-2 text-[11px] font-bold text-white transition-colors duration-200 hover:bg-[#1D1D1F]"
+                        className="inline-flex items-center gap-2 py-1 text-[14px] font-medium text-[#E60012] underline-offset-4 hover:underline"
                       >
                         {link.label}
                         <ArrowUpRight size={12} />
@@ -1225,32 +1225,42 @@ export default function App() {
                 )}
               </div>
 
-              <div className="mt-6">
-                <div className="mb-4 flex items-end justify-between gap-4 border-t border-[#E5E5EA] pt-6">
+              <div className="mt-12">
+                <div className="mb-8 flex items-end justify-between gap-4 border-t border-[#E5E5EA] pt-10">
                   <div>
-                    <div style={MONO} className="mb-2 text-[10px] uppercase tracking-[0.24em] text-[#E60012]">
-                      Problem & implementation
-                    </div>
-                    <h3 className="text-[24px] font-black tracking-[-0.04em] text-[#1D1D1F] sm:text-[30px]">
+                    <h3 className="text-[24px] font-semibold tracking-[-0.035em] text-[#232326]">
                       기획과 구현
                     </h3>
                   </div>
                 </div>
 
                 <p className="mb-4 text-[12px] text-[#6E6E73]">이미지를 누르면 원본을 볼 수 있습니다.</p>
-                <div className="grid gap-4 lg:grid-cols-2">
+                <div className="grid grid-cols-1 divide-y divide-[#E5E5EA]">
                   {selectedProject.planningSections?.map((section) => (
                     <article
                       key={`${selectedProject.id}-${section.title}`}
-                      className={`overflow-hidden rounded-[22px] border border-[#D2D2D7] bg-[#FBFBFD] shadow-[0_14px_42px_rgba(15,23,42,0.07)] ${getSectionImages(section).length ? "lg:col-span-2" : ""}`}
+                      className="py-10 first:pt-3"
                     >
-                      <div className={getSectionImages(section).length ? "grid min-h-full md:grid-cols-[1fr_1fr]" : "grid min-h-full"}>
+                      <div className={getSectionImages(section).length ? "grid items-start gap-8 md:grid-cols-[minmax(0,1.55fr)_minmax(0,1fr)] md:gap-10" : "max-w-[720px]"}>
+                        <div>
+                          <div style={MONO} className="mb-3 text-[12px] tracking-[0.12em] text-[#86868B]">
+                            {section.label.split(" / ")[0]}
+                          </div>
+                          <h4 className="break-keep text-[19px] font-semibold leading-[1.5] tracking-[-0.025em] text-[#232326]">
+                            {section.title}
+                          </h4>
+                          <div className="mt-5 space-y-5 break-keep text-[16px] font-normal leading-[1.85] text-[#424245]">
+                            <p>{section.intent}</p>
+                            <p>{section.execution}</p>
+                          </div>
+                        </div>
+
                         {getSectionImages(section).length > 0 && (
-                          <figure className="flex min-w-0 flex-col justify-center gap-3 border-b border-[#E5E5EA] bg-[#F5F5F7] p-4 md:border-b-0 md:border-r sm:p-6">
+                          <figure className="flex min-w-0 flex-col gap-4">
                             <div className={getSectionImages(section).length > 1 ? "grid w-full grid-cols-2 items-center gap-3" : "flex items-center justify-center"}>
                               {getSectionImages(section).map((image, imageIndex) => (
                                 <a
-                                  key={`${selectedProject.id}-${section.label}-image-${imageIndex}`}
+                                  key={`${selectedProject.id}-${section.label.split(" / ")[0]}-image-${imageIndex}`}
                                   href={image}
                                   target="_blank"
                                   rel="noreferrer"
@@ -1261,7 +1271,7 @@ export default function App() {
                                     src={image}
                                     alt={section.imageCaption || `${selectedProject.title} ${section.title} 화면`}
                                     loading="lazy"
-                                    className="max-h-[460px] max-w-full rounded-[10px] object-contain shadow-[0_8px_28px_rgba(15,23,42,0.12)]"
+                                    className="max-h-[460px] max-w-full rounded-[12px] object-contain"
                                   />
                                 </a>
                               ))}
@@ -1271,27 +1281,14 @@ export default function App() {
                             </figcaption>
                           </figure>
                         )}
-
-                        <div className="p-5 sm:p-6">
-                          <div style={MONO} className="mb-2 text-[10px] uppercase tracking-[0.18em] text-[#E60012]">
-                            {section.label}
-                          </div>
-                          <h4 className="text-[18px] font-black tracking-[-0.03em] text-[#1D1D1F]">
-                            {section.title}
-                          </h4>
-                          <div className="mt-4 space-y-4 break-keep text-[15px] leading-[1.85] text-[#515154]">
-                            <p>{section.intent}</p>
-                            <p>{section.execution}</p>
-                          </div>
-                        </div>
                       </div>
                     </article>
                   ))}
                 </div>
               </div>
-              <section aria-labelledby="development-logs-title" className="mt-7 border-t border-[#E5E5EA] pt-6">
+              <section aria-labelledby="development-logs-title" className="mt-6 border-t border-[#E5E5EA] pt-10">
                 <div className="mb-4 flex items-baseline justify-between gap-4">
-                  <h3 id="development-logs-title" className="text-[22px] font-black tracking-[-0.04em]">개발로그</h3>
+                  <h3 id="development-logs-title" className="text-[23px] font-semibold tracking-[-0.03em]">개발로그</h3>
                   <span className="text-[12px] text-[#86868B]">{getDevelopmentLogs(selectedProject).length}편</span>
                 </div>
                 <div className="grid gap-3">
@@ -1299,10 +1296,10 @@ export default function App() {
                 <a
                   key={log.slug}
                   href={`#/projects/${selectedProject.id}/logs/${log.slug}`}
-                  className="group flex items-start justify-between gap-5 rounded-[20px] border border-[#D2D2D7] bg-[#FBFBFD] p-5 transition-colors hover:border-[#E60012]/40 hover:bg-[#FFF8F8] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#E60012]"
+                  className="group flex items-start justify-between gap-5 border-b border-[#E5E5EA] py-5 transition-colors hover:text-[#E60012] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#E60012]"
                 >
                   <div className="min-w-0">
-                    <h4 className="break-keep text-[17px] font-bold leading-[1.5]">{log.title}</h4>
+                    <h4 className="break-keep text-[17px] font-medium leading-[1.5]">{log.title}</h4>
                     <p className="mt-2 break-keep text-[13px] leading-[1.8] text-[#6E6E73]">{log.summary}</p>
                   </div>
                   <ArrowUpRight size={20} className="mt-1 shrink-0 text-[#E60012]" aria-hidden="true" />
