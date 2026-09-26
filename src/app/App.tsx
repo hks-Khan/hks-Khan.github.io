@@ -792,6 +792,29 @@ function DevelopmentLogPage({ project, log }: { project: Project; log: Developme
   );
 }
 
+// Short editorial selections: at most one accent per paragraph, without rewriting copy.
+const DETAIL_EMPHASIS = [
+  "자신의 목적과 수준에 맞는 계획", "SoomchaSwim으로 개편", "AI가 할 일을 정리하고 진행 상황을 갱신",
+  "프로그램과 세션을 저장", "템플릿 정책과 운동 라이브러리", "회차별 운동을 미리 준비", "8개 프로그램의 84개 회차", "같은 원본에서", "Watch에서 실행할 세트 목록", "transferUserInfo",
+  "MCP 도구를 연결", "이슈의 우선순위·마감·상태와 작업 기록", "실행 상태와 승인·질문·결과", "중단·재개", "승인·만료·철회 상태", "연결이 끊겼을 때 다시 연결",
+  "한국어 LLM의 발언 분류", "LoRA 미세조정", "예측 원문", "오탐과, 상대를 비하한 말을 놓치는 미탐", "경계 사례", "선별 규칙",
+  "짧게 묻고 답하게", "한 번에 한 질문", "내가 말한", "실제로 사용한 문장", "저장한 문장을 음성", "음성 인식·대화·음성 합성", "Keychain",
+  "경로와 사진", "SQLite", "종료 시각을 앞당길", "위치·사진·걸음 표본", "키워드·지역·카테고리", "로컬에 저장",
+  "기억과 관계", "건설·연구·제작", "진행 중인 작업·항해 상태를 저장", "관계와 기억에 반영", "회복 상태·거리·시야", "성격·기억·목표", "이동·건설·저장 복원", "상황 문장과 선택지", "현재 진행 위치를 기준으로 예약을 복구", "스탯과 분기, 실패·엔딩 조건", "공통 엔진이 결과를 계산", "문장과 장면", "문맥을 포함해 Datamuse", "활동 기록을 동기화", "캐릭터별 동작", "날짜별 활동량과 지급 내역", "데이터베이스와 화면의 잔액을 함께 복원", "역할과 캐릭터 설정", "NPC의 설정과 대화 목적", "맵과 캐릭터 에셋", "장면과 대화 내용"
+];
+
+function detailEmphasis(text: string = "") {
+  return text.split("\n\n").flatMap((paragraph, index) => {
+    const phrase = DETAIL_EMPHASIS.find((candidate) => paragraph.includes(candidate));
+    const separator = index ? "\n\n" : "";
+    if (!phrase) return [separator, paragraph];
+    const start = paragraph.indexOf(phrase);
+    return [separator, paragraph.slice(0, start),
+      <strong key={index} className="font-semibold text-[#E60012]">{phrase}</strong>,
+      paragraph.slice(start + phrase.length)];
+  });
+}
+
 export default function App() {
   const [introDone, setIntroDone] = useState(false);
   const [hash, setHash] = useState(() => window.location.hash);
@@ -1194,7 +1217,7 @@ export default function App() {
                   프로젝트 소개
                 </div>
                 <p className="max-w-[720px] whitespace-pre-line break-keep text-[16px] font-normal leading-[1.85] text-[#424245]">
-                  {selectedProject.detailIntro}
+                  {detailEmphasis(selectedProject.detailIntro)}
                 </p>
 
                 <p className="mt-7 text-[13px] font-normal leading-[1.8] text-[#6E6E73]">{selectedProject.statusNote}</p>
@@ -1243,15 +1266,15 @@ export default function App() {
                     >
                       <div className={getSectionImages(section).length ? "grid items-start gap-8 md:grid-cols-[minmax(0,1.55fr)_minmax(0,1fr)] md:gap-10" : "max-w-[720px]"}>
                         <div>
-                          <div style={MONO} className="mb-3 text-[12px] tracking-[0.12em] text-[#86868B]">
+                          <div style={MONO} className="mb-3 text-[12px] tracking-[0.12em] text-[#E60012]">
                             {section.label.split(" / ")[0]}
                           </div>
-                          <h4 className="break-keep text-[19px] font-semibold leading-[1.5] tracking-[-0.025em] text-[#232326]">
+                          <h4 className="break-keep text-[19px] font-semibold leading-[1.5] tracking-[-0.025em] text-[#E60012]">
                             {section.title}
                           </h4>
                           <div className="mt-5 space-y-5 break-keep text-[16px] font-normal leading-[1.85] text-[#424245]">
-                            <p>{section.intent}</p>
-                            <p>{section.execution}</p>
+                            <p>{detailEmphasis(section.intent)}</p>
+                            <p>{detailEmphasis(section.execution)}</p>
                           </div>
                         </div>
 
