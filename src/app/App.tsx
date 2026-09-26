@@ -810,7 +810,7 @@ function detailEmphasis(text: string = "") {
     if (!phrase) return [separator, paragraph];
     const start = paragraph.indexOf(phrase);
     return [separator, paragraph.slice(0, start),
-      <strong key={index} className="bg-[#FCE8EA] px-0.5 font-medium text-[#424245] [box-decoration-break:clone]">{phrase}</strong>,
+      <strong key={index} className="px-0.5 font-medium text-[#424245] [box-decoration-break:clone]">{phrase}</strong>,
       paragraph.slice(start + phrase.length)];
   });
 }
