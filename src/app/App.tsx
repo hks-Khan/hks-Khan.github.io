@@ -16,6 +16,14 @@ type PlanningSection = {
   execution: string;
 };
 
+type DevelopmentLog = {
+  slug: string;
+  title: string;
+  summary: string;
+  intro: string;
+  sections: PlanningSection[];
+};
+
 type Project = {
   id: string;
   title: string;
@@ -33,9 +41,222 @@ type Project = {
   detailIntro?: string;
   statusNote?: string;
   planningSections?: PlanningSection[];
+  developmentLogs?: DevelopmentLog[];
 };
 
 const PROJECTS: Project[] = [
+  {
+    "id": "02",
+    "title": "Aquach / SoomchaSwim",
+    "subtitle": "Swim Training Programs",
+    "description": "훈련 목적에 맞는 수영 계획을 세우고, Apple Watch에서 운동하며 기록하는 앱입니다. Aquach 출시 후 프로그램 중심의 SoomchaSwim으로 개편하고 있습니다.",
+    "highlights": [
+      "훈련 목적과 수준에 맞춘 회차별 프로그램",
+      "LLM 기반 생성에서 사전 설계 프로그램으로 발전",
+      "iPhone·Apple Watch 운동 계획과 기록 연동"
+    ],
+    "tags": [
+      "TypeScript",
+      "React Native",
+      "Expo",
+      "SwiftUI",
+      "HealthKit",
+      "Supabase"
+    ],
+    "status": "출시 · 후속 개발",
+    "imageLabel": "SoomchaSwim · 개발 중인 운동 상세",
+    "image": "/images/projects/soomchaswim-workout.png",
+    "logo": "/images/logo-aquach.png",
+    "accent": "AI + Fitness",
+    "links": [
+      {
+        "label": "Aquach · App Store",
+        "href": "https://apps.apple.com/kr/app/id6745004612"
+      }
+    ],
+    "featured": true,
+    "detailIntro": "자유수영에서는 정해진 프로그램 없이 그날 하고 싶은 영법과 거리를 선택해 운동하기 쉽습니다. 꾸준히 수영해도 다음 운동에서 무엇을 바꾸고 얼마나 늘려야 할지는 스스로 정해야 합니다. 수영강사로 일하며 접한 이 문제에서 Aquach를 시작했습니다. 훈련 프로그램을 직접 설계하는 부담을 줄이고, 자신의 목적과 수준에 맞는 계획을 따라 운동하고 기록하도록 만들었습니다.\n\n현재는 점진적 과부하처럼 훈련량과 강도를 단계적으로 조절하는 원리를 여러 회차에 담을 수 있도록 SoomchaSwim으로 개편하고 있습니다. 함께 개발 중인 Soomcha와는 앱 허브 형태로 묶어갈 계획입니다.",
+    "planningSections": [
+      {
+        "label": "01 / Aquach · SoomchaSwim",
+        "title": "훈련 목적에 맞는 수영 프로그램 구성",
+        "image": "/images/projects/soomchaswim-workout.png",
+        "intent": "호흡과 자세를 익히는 훈련, 스트로크 효율을 높이는 훈련, 유산소·스프린트·장거리 완주처럼 목적에 따라 프로그램을 고르도록 구성했습니다. 목표와 기록 등의 맥락으로 추천 후보를 정하고, 선택한 프로그램에 수준·풀 규격·장비 조건을 적용합니다.",
+        "execution": "서버는 해당 조건의 회차별 운동 데이터를 읽고 장비 대체안을 선택합니다. 주당 운동 횟수와 선호 요일을 반영해 일정을 구성하고, 사용자가 수행할 프로그램과 세션을 저장합니다.",
+        "imageCaption": "SoomchaSwim 개발 버전 · 회차별 운동 상세"
+      },
+      {
+        "label": "02 / Aquach · SoomchaSwim",
+        "title": "LLM 기반 운동 생성에서 프로그램 기반 설계로",
+        "image": "",
+        "intent": "Aquach의 LLM 기반 운동 생성에서 출발해, 훈련 목적과 구성 규칙을 템플릿으로 제공하는 방식을 거쳤습니다. 템플릿 정책과 운동 라이브러리를 AI에 전달하고, 생성된 프로그램 설계안을 코드에서 세션으로 구성했습니다.",
+        "execution": "현재 SoomchaSwim은 회차별 운동을 미리 준비하고 사용자 조건에 맞는 구성을 선택합니다. 주차별 진행과 회복·최종 목표를 프로그램 원본에서 검토할 수 있으며, AI는 제목·개인화 요약·코치 안내를 작성합니다. 프로그램 저장 후 문구를 요청하므로 AI 호출이 실패해도 기본 안내로 시작할 수 있습니다."
+      },
+      {
+        "label": "03 / Aquach · SoomchaSwim",
+        "title": "회차별 훈련 데이터를 설계하고 검증하기",
+        "image": "",
+        "intent": "8개 프로그램의 84개 회차를 준비하고, 초급·중급·상급과 25m·50m·25yd 풀에 따른 756개 처방 조합을 데이터로 관리합니다. 각 회차에는 운동 블록과 세트, 거리·반복·휴식·출발 간격, 장비 대체안을 담았습니다.",
+        "execution": "같은 원본에서 DB 반영용 데이터, 앱 테스트용 데이터, 검토용 문서를 생성합니다. 원본 구조와 운동 참조 등을 검사해 자료 간 차이를 줄이고, 사용자가 시작할 때 확정된 세션을 저장해 이후 템플릿 수정이 진행 중인 운동에 영향을 주지 않도록 했습니다."
+      },
+      {
+        "label": "04 / Aquach · SoomchaSwim",
+        "title": "iPhone에서 계획하고 Apple Watch에서 수행하기",
+        "image": "/images/detail/aquach-watch-plan.png",
+        "intent": "iPhone의 운동 구성을 Watch에서 실행할 세트 목록으로 변환해 전달합니다. Watch에서는 받은 계획과 세트별 운동 내용을 확인하고, 운동을 마친 뒤 iPhone에서 기록을 돌아볼 수 있습니다.",
+        "execution": "Watch에 도달할 수 있으면 sendMessage로 즉시 보내고, 전송이 실패하거나 연결할 수 없으면 transferUserInfo로 전달을 예약합니다. iPhone에서 받은 완료 메시지는 고유 ID로 중복을 확인하고 로컬 파일에 보관합니다.",
+        "images": [
+          "/images/detail/aquach-watch-plan.png",
+          "/images/detail/aquach-watch-run.png",
+          "/images/detail/aquach-calendar.png",
+          "/images/detail/aquach-record-summary.png"
+        ],
+        "imageCaption": "Aquach · Watch 계획 수신·세트 진행 / iPhone 캘린더·운동 기록"
+      }
+    ],
+    "statusNote": "Aquach · App Store 출시 / SoomchaSwim · 후속 개발 중",
+    "developmentLogs": [
+      {
+        "slug": "generation-evolution",
+        "title": "Aquach의 운동 생성 방식은 어떻게 바뀌었나",
+        "summary": "LLM 기반 생성에서 템플릿 규칙을 거쳐 사전 설계 프로그램으로 발전한 과정",
+        "intro": "자유수영에서 매번 운동 내용을 정하는 부담을 줄이기 위해 Aquach를 만들었습니다. SoomchaSwim으로 개편하면서는 한 번의 운동뿐 아니라 여러 회차가 어떤 목적과 순서로 이어지는지를 프로그램의 중심에 놓았습니다. 이 글은 이전 생성 코드와 베이스 프로그램 실험, 현재 Program V1의 구조를 비교한 기록입니다.",
+        "sections": [
+          {
+            "label": "01 / Aquach · SoomchaSwim",
+            "title": "한 번의 운동을 여러 회차의 훈련으로 연결하기",
+            "image": "",
+            "intent": "예를 들어 자유수영 때 익숙한 영법으로 비슷한 거리를 반복한다면, 다음번에는 거리를 늘릴지 쉬는 시간을 바꿀지 결정해야 합니다. 장거리 완주가 목표라면 한 회차의 총거리뿐 아니라 반복 구간, 연속영, 회복과 최종 점검의 순서도 필요합니다.",
+            "execution": "이런 사용 상황을 출발점으로 운동 계획을 제공했고, 후속 개발에서는 목적별 프로그램과 회차별 진행을 구체화했습니다. 프로그램의 생성 결과를 읽는 것에서 더 나아가, 어떤 훈련 흐름을 제공하는지 원본 단계에서 검토할 수 있게 만드는 방향입니다."
+          },
+          {
+            "label": "02 / Aquach · SoomchaSwim",
+            "title": "템플릿 정책과 운동 라이브러리를 사용하는 생성 흐름",
+            "image": "",
+            "intent": "이전 ProgramGenerationService는 프로필과 사용자 입력, 템플릿 정책, 운동 라이브러리를 ProgramAIService에 전달합니다. AI가 전체 회차와 주차 테마를 포함한 설계안을 반환하면 SessionBuilder가 각 세션을 구성하고, applyProgramSessionBatch가 결과를 저장합니다.",
+            "execution": "이 단계의 템플릿은 AI 입력에 운동 목적과 구성 조건을 제공하는 역할을 합니다. 생성된 회차를 앱에서 다룰 수 있도록 구성하고 저장하는 처리는 코드가 맡습니다. 프로그램을 생성 중·완료·실패 상태로 추적하는 흐름도 이 과정에 포함돼 있습니다."
+          },
+          {
+            "label": "03 / Aquach · SoomchaSwim",
+            "title": "베이스 프로그램을 먼저 작성한 실험",
+            "image": "",
+            "intent": "2026년 3월에는 장거리 완주 프로그램의 주차별 메인 운동을 먼저 작성하고, AI가 드릴·보조 블록·포커스·코치 문구를 선택하는 실험을 진행했습니다. 비교안에는 500m→600m→700m 연속영으로 늘리는 구성과, 4×200m→3×300m처럼 반복 구간을 거쳐 연속영으로 이어지는 구성이 있었습니다.",
+            "execution": "검토 기록에서는 첫 회차의 진입 부담, 메인 운동의 단조로움, 목표 거리에 도달하는 시점과 마지막 주의 역할을 비교했습니다. 이 자료는 설계안과 생성 결과의 비교 기록이며, 실제 훈련 효과를 측정한 결과는 아닙니다. 현재 구현과 구분해 전환 과정의 실험으로 남겼습니다."
+          },
+          {
+            "label": "04 / Aquach · SoomchaSwim",
+            "title": "현재 Program V1에서 운동 구성을 정하는 방법",
+            "image": "",
+            "intent": "현재 화면은 ProgramV1Service를 통해 create-program-v1을 호출합니다. 서버는 템플릿·수준·풀 규격·장비·운동 일정 조건을 DB 함수에 전달하고, 준비된 회차별 처방에서 실제 수행할 구성을 선택해 사용자 프로그램을 저장합니다.",
+            "execution": "이 구조에서는 운동 구성과 회차의 흐름이 프로그램 데이터에 남습니다. 원본을 검토하고 조건별 조합을 확인한 뒤 앱에 제공할 수 있습니다. 주차별 진행을 검토하는 작업이 매번 생성된 답변을 해석하는 과정에만 의존하지 않게 됐습니다."
+          },
+          {
+            "label": "05 / Aquach · SoomchaSwim",
+            "title": "AI가 작성하는 내용과 실패했을 때의 동작",
+            "image": "",
+            "intent": "프로그램 저장 뒤 AI에 요청하는 출력은 title, personalizationSummary, coachNote 세 가지입니다. 입력에는 템플릿 ID, 수준, 주당 횟수, 선택 장비와 언어가 들어갑니다. 원본 세트나 회차별 처방 전체를 전달하는 구조는 아니므로, 상세 운동 분석까지 수행한다고 설명할 수는 없습니다.",
+            "execution": "응답 필드와 길이를 검사하고 유효한 문구만 apply_program_v1_copy로 반영합니다. 호출 시간 제한, 형식 오류 또는 문구 저장 실패가 발생하면 이미 생성된 프로그램과 기본 안내를 유지합니다. 현재 후속 버전의 코드 구조이며, Aquach 출시본의 모든 동작과 동일하다는 의미는 아닙니다."
+          }
+        ]
+      },
+      {
+        "slug": "program-data-design",
+        "title": "회차별 수영 프로그램을 미리 설계하고 데이터로 만들기",
+        "summary": "목적·수준·풀 규격별 훈련 데이터와 검토·DB·앱 자료를 함께 관리하는 과정",
+        "intro": "미리 준비한 프로그램을 제공하려면 회차별 운동 내용과 앱에서 실행할 데이터를 함께 관리해야 합니다. SoomchaSwim에서는 프로그램 목적, 회차별 처방, 사용자에게 배정한 운동을 연결하고 같은 원본에서 여러 산출물을 생성하도록 구성했습니다.",
+        "sections": [
+          {
+            "label": "01 / Aquach · SoomchaSwim",
+            "title": "목적과 회차를 데이터의 기준으로 삼기",
+            "image": "",
+            "intent": "프로그램 메타데이터에는 목적, 권장 수준, 총 회차 수와 허용 주당 횟수 등을 둡니다. 회차 원본에는 워밍업·드릴·본운동·회복·쿨다운 블록과 세트의 거리·반복·시간 조건을 담습니다. 목적과 회차의 연결을 유지하면서 실제 수행 내용을 확인할 수 있는 구조입니다.",
+            "execution": "ProgramRecommendationService는 goalId와 기록 등의 맥락을 받아 우선 추천과 대안 프로그램을 고릅니다. 사용자가 선택한 프로그램을 기준으로 세션을 구성하므로, 추천 단계와 실제 수행할 운동 데이터의 연결을 추적할 수 있습니다."
+          },
+          {
+            "label": "02 / Aquach · SoomchaSwim",
+            "title": "수준과 풀 규격에 따른 처방 관리",
+            "image": "",
+            "intent": "현재 준비된 데이터는 8개 프로그램과 84개 회차입니다. 각 회차의 초급·중급·상급을 합하면 252개 수준별 처방이고, 25m·50m·25yd 조건을 포함하면 756개 조합입니다. 이 수치는 관리하는 데이터의 규모입니다.",
+            "execution": "풀 길이와 단위를 명시해 거리와 반복 구성을 해석하고, 장비가 필요한 운동에는 대체안을 둡니다. 생성 함수는 선택한 수준과 풀 규격의 처방을 읽고 사용할 수 있는 장비에 맞는 블록을 고릅니다. 모든 사용자에게 같은 회차 데이터를 그대로 복사하는 흐름과는 구별되는 조건 선택 과정입니다."
+          },
+          {
+            "label": "03 / Aquach · SoomchaSwim",
+            "title": "훈련 진행과 회복을 검토하기",
+            "image": "",
+            "intent": "장거리 완주 베이스를 비교할 때는 회차별 총거리만 보지 않고 반복 구간과 연속영의 배치, 회복 회차, 최종 목표를 확인하는 시점을 함께 검토했습니다. 목표 거리에 마지막 주보다 먼저 도달하는 구성에서는 이후 회차의 목적도 다시 설명해야 했습니다.",
+            "execution": "이런 판단을 프로그램 원본과 비교 기록에 남기면 어느 회차를 왜 바꿨는지 확인할 수 있습니다. 점진적 과부하를 지향하는 설계 의도와 실제 훈련 효과는 서로 다른 확인 대상입니다. 여기서는 회차를 구성하고 검토한 과정과 이를 표현하는 데이터 구조를 다룹니다."
+          },
+          {
+            "label": "04 / Aquach · SoomchaSwim",
+            "title": "하나의 원본에서 DB·앱·검토 자료 생성하기",
+            "image": "",
+            "intent": "scripts/program-v1의 빌드 스크립트가 세션 JSON과 프로그램 메타데이터를 읽습니다. 원본의 허용 필드와 값 형식, 운동 라이브러리 참조, 번역 등 구성 규칙을 검사한 뒤 DB 반영용 SQL, 앱 테스트용 fixture, Markdown·HTML 검토 자료를 생성합니다.",
+            "execution": "검토 문서를 따로 고치고 실행 데이터를 다시 맞추는 대신, 원본에서 각 형식의 자료를 만들어 비교할 수 있게 했습니다. source_hash를 산출물에 포함해 어떤 원본에서 생성됐는지도 추적합니다. 이 검사는 데이터와 구조의 일관성을 확인하며 운동 효과 자체를 입증하는 검사는 아닙니다."
+          },
+          {
+            "label": "05 / Aquach · SoomchaSwim",
+            "title": "사용자가 시작한 프로그램과 저장 결과 다루기",
+            "image": "",
+            "intent": "생성 시 확정된 세션 구성을 사용자 데이터에 저장합니다. 원본 템플릿을 수정해도 진행 중인 프로그램의 내용이 따라 바뀌지 않도록 하고, 이후 수행과 기록은 저장된 구성을 기준으로 이어집니다.",
+            "execution": "생성 응답을 놓친 경우에는 같은 호출에서 사용한 요청 ID로 저장된 활성 프로그램을 조회합니다. 결과가 있으면 그 ID를 반환합니다. 현재 확인한 복구는 생성 호출 중 네트워크 오류를 처리하는 범위이며, 앱 재시작 뒤에도 요청을 자동 복구하는 기능까지 의미하지는 않습니다."
+          }
+        ]
+      },
+      {
+        "slug": "watch-workout-flow",
+        "title": "설계한 운동을 Apple Watch에서 수행하기까지",
+        "summary": "운동 데이터의 Watch 전송 형식, 즉시·지연 전달과 완료 메시지 보관",
+        "intro": "iPhone에서 만든 운동 계획이 Watch의 세트 진행으로 이어지려면 운동 데이터의 형식과 전달 방식이 맞아야 합니다. Aquach의 저장된 Watch 화면과 현재 SoomchaSwim 저장소의 연결 코드를 바탕으로 계획 전달과 완료 기록 처리 흐름을 정리했습니다.",
+        "sections": [
+          {
+            "label": "01 / Aquach · SoomchaSwim",
+            "title": "앱의 운동 구성을 Watch용 계획으로 변환하기",
+            "image": "",
+            "intent": "WatchConnectivityService는 운동 계획을 WatchWorkoutPlanPayload 형식으로 전달합니다. 계획 ID와 제목, 총거리, 예상 시간, 풀 길이와 거리 단위에 더해 세트별 운동 이름·거리·반복·시간 조건을 담습니다.",
+            "execution": "세트 유형은 워밍업·드릴·본운동·쿨다운으로 전달하고 시간 조건은 휴식, 출발 간격, 수행 시간으로 구분합니다. 휴식 시간과 출발 간격은 계산 기준이 다르므로 값만 전달하지 않고 timing.method에 의미를 함께 담습니다."
+          },
+          {
+            "label": "02 / Aquach · SoomchaSwim",
+            "title": "받은 계획을 세트별 운동으로 보여주기",
+            "image": "/images/detail/aquach-watch-plan.png",
+            "intent": "Watch의 계획 화면에는 수신한 운동 이름과 거리, 예상 시간, 세트 수가 표시됩니다. 운동을 시작하면 현재 세트의 운동과 거리, 진행 상태를 확인하고 완료하거나 건너뛸 수 있습니다.",
+            "execution": "아래 자료는 기존 Aquach의 저장된 화면입니다. 계획의 목록·세트 데이터가 Watch의 실제 사용 화면에서 어떻게 표현되는지 보여줍니다. 이 글을 작성하면서 새 실기기 운동 테스트를 수행한 것은 아닙니다.",
+            "images": [
+              "/images/detail/aquach-watch-plan.png",
+              "/images/detail/aquach-watch-run.png"
+            ],
+            "imageCaption": "Aquach 저장 화면 · 계획 수신 / 세트 진행"
+          },
+          {
+            "label": "03 / Aquach · SoomchaSwim",
+            "title": "즉시 보낼 수 없을 때도 전달 경로 유지하기",
+            "image": "",
+            "intent": "Swift의 WatchConnectivityModule은 Watch 도달 가능 여부를 확인합니다. 도달할 수 있으면 sendMessage로 계획을 보내고, 오류가 발생하거나 도달할 수 없으면 transferUserInfo를 사용해 전달을 예약합니다.",
+            "execution": "이 연결 처리는 Expo 네이티브 모듈을 통해 React Native 코드와 이어집니다. 즉시 응답이 필요한 전달과 연결 상태에 따라 늦게 도착할 수 있는 전달을 코드에서 구분합니다. 예약한 전송은 WatchConnectivity의 전달 조건에 영향을 받으므로 즉시 도착을 보장하지는 않습니다."
+          },
+          {
+            "label": "04 / Aquach · SoomchaSwim",
+            "title": "완료 메시지를 앱에서 처리할 때까지 보관하기",
+            "image": "",
+            "intent": "완료 데이터에는 계획 ID, 완료 시각, 실제 운동 시간과 수행한 세트 정보 등이 들어갑니다. iPhone의 네이티브 모듈은 완료 메시지에 고유 ID를 붙이고 이미 보관된 메시지인지 확인한 다음 대기 목록에 추가합니다.",
+            "execution": "대기 목록은 로컬 JSON 파일에 원자적으로 저장하고 파일 보호를 적용합니다. 메모리에만 보관하지 않아 앱 쪽 처리가 늦어지는 동안 메시지를 유지할 수 있습니다. 계획 전달과 완료 메시지 보관의 각 단계를 확인하면 기록이 누락됐을 때 어느 경로를 조사할지도 좁힐 수 있습니다."
+          },
+          {
+            "label": "05 / Aquach · SoomchaSwim",
+            "title": "iPhone에서 운동 기록으로 이어가기",
+            "image": "/images/detail/aquach-calendar.png",
+            "intent": "Watch에서 수행한 운동은 iPhone의 캘린더와 기록 화면에서 돌아볼 수 있도록 연결했습니다. 계획 ID와 완료 데이터가 앱의 운동 기록으로 이어지는 흐름을 두 기기 사이의 접점으로 사용합니다.",
+            "execution": "프로그램을 고르는 화면, Watch에서 수행하는 화면, iPhone에서 기록을 확인하는 화면이 같은 운동을 가리켜야 합니다. 전달 데이터의 식별자와 단위, 세트 구성을 함께 다루는 것이 이 연동의 핵심입니다.",
+            "images": [
+              "/images/detail/aquach-calendar.png",
+              "/images/detail/aquach-record-summary.png"
+            ],
+            "imageCaption": "Aquach · 캘린더 / 운동 기록"
+          }
+        ]
+      }
+    ]
+  },
   {
     "id": "01",
     "logo": "/images/logo-jitdeck.png",
@@ -83,75 +304,6 @@ const PROJECTS: Project[] = [
     "image": "/images/projects/jitdeck-board-example.jpg",
     "imageLabel": "초기 이슈 보드 · 예시 프로젝트",
     "accent": "AI Developer Tools"
-  },
-  {
-    "id": "02",
-    "title": "Aquach / SoomchaSwim",
-    "subtitle": "AI Swim Training App",
-    "description": "혼자 수영할 때 필요한 운동 계획과 기록을 제공하는 앱입니다. Aquach 출시 후 SoomchaSwim으로 발전시키고 있습니다.",
-    "highlights": [
-      "수영강사 경험을 바탕으로 Aquach 출시",
-      "수준·일정에 맞춘 다회차 훈련 프로그램",
-      "iPhone·Apple Watch 운동 계획과 기록 연동"
-    ],
-    "tags": [
-      "TypeScript",
-      "React Native",
-      "Expo",
-      "SwiftUI",
-      "HealthKit",
-      "Supabase"
-    ],
-    "status": "출시 · 후속 개발",
-    "imageLabel": "SoomchaSwim · 개발 중인 운동 상세",
-    "image": "/images/projects/soomchaswim-workout.png",
-    "logo": "/images/logo-aquach.png",
-    "accent": "AI + Fitness",
-    "links": [
-      {
-        "label": "Aquach · App Store",
-        "href": "https://apps.apple.com/kr/app/id6745004612"
-      }
-    ],
-    "featured": true,
-    "detailIntro": "수영강사로 일하며 수준과 목표에 따라 필요한 훈련이 달라지는 것을 경험했습니다. 혼자 수영하는 날에도 운동 계획을 세우고 기록을 돌아볼 수 있도록 Aquach를 만들었습니다. SoomchaSwim에서는 여러 주에 걸쳐 훈련을 이어가는 기능을 개발하고 있습니다.",
-    "planningSections": [
-      {
-        "label": "01 / AI Swim Training App",
-        "title": "한 번의 운동에서 여러 주의 훈련으로",
-        "image": "/images/projects/soomchaswim-workout.png",
-        "intent": "Aquach에서는 수준·목표·선호 영법·최근 기록을 바탕으로 오늘의 운동을 정했습니다. SoomchaSwim에서는 장비, 주당 횟수와 요일까지 반영해 여러 회차의 프로그램을 만들도록 확장했습니다.",
-        "execution": "사용자는 예정된 세션을 열어 운동하고 기록을 남깁니다. 완료한 운동이 프로그램의 진행 상황에 반영돼 다음 훈련을 이어갈 수 있습니다.",
-        "imageCaption": "SoomchaSwim 개발 버전 · 운동 상세"
-      },
-      {
-        "label": "02 / AI Swim Training App",
-        "title": "시작한 프로그램의 운동 구성 유지하기",
-        "image": "",
-        "intent": "프로그램을 시작한 뒤 템플릿이 바뀌어도 사용자가 진행하던 운동은 유지돼야 합니다. 검토된 템플릿으로 개인 프로그램을 만들고, 시작할 때 각 세션의 구성을 저장했습니다.",
-        "execution": "AI는 제목·개인화 요약·코치 안내를 작성합니다. 운동 구성을 정하는 부분과 안내를 쓰는 부분을 분리했고, AI 호출에 실패하면 기본 안내를 제공합니다."
-      },
-      {
-        "label": "03 / AI Swim Training App",
-        "title": "통신이 끊겨도 만든 프로그램 찾기",
-        "image": "",
-        "intent": "생성 요청 뒤 통신이 끊기면 서버에 저장된 프로그램을 앱이 받지 못할 수 있습니다. 다시 시도할 때 같은 프로그램을 중복 생성하지 않도록 요청별 식별자를 사용했습니다.",
-        "execution": "프로그램과 세션을 함께 저장하고, 재접속하면 같은 요청으로 만든 결과를 조회합니다. 앱에서 실패로 보였더라도 서버에 저장된 결과를 찾아 이어서 사용할 수 있습니다."
-      },
-      {
-        "label": "04 / AI Swim Training App",
-        "title": "Watch에서 운동하고 iPhone에서 기록 보기",
-        "image": "/images/detail/aquach-calendar.png",
-        "intent": "Aquach에서 만든 운동 계획을 Apple Watch로 보내고, 운동을 마치면 iPhone에서 수행 기록을 확인하도록 연동했습니다. 연결이 잠시 끊겨도 전달할 계획과 완료 기록을 보관합니다.",
-        "execution": "운동 계획과 완료 메시지는 전송 대기 목록으로 관리하고, HealthKit의 운동 식별자로 기기에 저장된 기록을 찾습니다. 사용자는 캘린더와 상세 기록에서 운동량을 돌아볼 수 있습니다.",
-        "imageCaption": "Aquach · 캘린더와 운동 기록",
-        "images": [
-          "/images/detail/aquach-calendar.png",
-          "/images/detail/aquach-record-summary.png"
-        ]
-      }
-    ],
-    "statusNote": "Aquach · App Store 출시 / SoomchaSwim · 후속 개발 중"
   },
   {
     "id": "03",
@@ -557,24 +709,34 @@ const statusBadgeClass = (status: string, size: "large" | "small") =>
     STATUS_BADGE_STYLES[status] ?? "border-[#111827]/20 bg-[#52525B]"
   }`;
 
-function DevelopmentLogPage({ project }: { project: Project }) {
+const getDevelopmentLogs = (project: Project): DevelopmentLog[] => project.developmentLogs ?? [{
+  slug: "design-and-implementation",
+  title: `${project.title} — 기획과 구현`,
+  summary: project.planningSections?.map((section) => section.title).join(" · ") ?? "",
+  intro: project.detailIntro ?? project.description,
+  sections: project.planningSections ?? [],
+}];
+
+function DevelopmentLogPage({ project, log }: { project: Project; log: DevelopmentLog }) {
   return (
     <div style={BODY} className="min-h-screen bg-[#F5F5F7] text-[#1D1D1F]">
       <header className="border-b border-[#D2D2D7] bg-white">
         <nav aria-label="개발로그 탐색" className="mx-auto flex max-w-4xl items-center justify-between gap-4 px-5 py-5 sm:px-8">
           <a href="#work" style={MONO} className="text-[11px] tracking-[0.2em] hover:text-[#E60012]">HKS.DEV</a>
-          <a href={`#/projects/${project.id}`} className="text-[13px] font-semibold hover:text-[#E60012]">← 프로젝트 요약</a>
+          <a href={`#/projects/${project.id}`} className="text-[13px] font-semibold hover:text-[#E60012]">← 프로젝트 상세</a>
         </nav>
       </header>
       <main className="mx-auto max-w-4xl px-5 pb-16 pt-10 sm:px-8 sm:pt-16">
         <article>
           <div style={MONO} className="mb-4 text-[11px] tracking-[0.2em] text-[#E60012]">개발로그 / {project.title}</div>
-          <h1 tabIndex={-1} className="break-keep text-[32px] font-black leading-[1.25] tracking-[-0.045em] outline-none sm:text-[46px]">{project.title} — 기획과 구현</h1>
-          <p className="mt-6 max-w-3xl break-keep text-[16px] leading-[1.9] text-[#515154]">{project.detailIntro}</p>
+          <h1 tabIndex={-1} className="break-keep text-[32px] font-black leading-[1.25] tracking-[-0.045em] outline-none sm:text-[46px]">{log.title}</h1>
+          <p className="mt-6 max-w-3xl break-keep text-[16px] leading-[1.9] text-[#515154]">{log.intro}</p>
           <div className="mb-8 mt-8 border-b border-[#D2D2D7] pb-5 text-[13px] text-[#6E6E73]">{project.statusNote}</div>
-                <p className="mb-4 text-[12px] text-[#6E6E73]">이미지를 누르면 원본을 볼 수 있습니다.</p>
+                {log.sections.some((section) => getSectionImages(section).length > 0) && (
+                  <p className="mb-4 text-[12px] text-[#6E6E73]">이미지를 누르면 원본을 볼 수 있습니다.</p>
+                )}
                 <div className="grid gap-4 grid-cols-1">
-                  {project.planningSections?.map((section) => (
+                  {log.sections.map((section) => (
                     <article
                       key={`${project.id}-${section.title}`}
                       className="overflow-hidden rounded-[22px] border border-[#D2D2D7] bg-[#FBFBFD] shadow-[0_14px_42px_rgba(15,23,42,0.07)]"
@@ -624,7 +786,7 @@ function DevelopmentLogPage({ project }: { project: Project }) {
                   ))}
                 </div>
         </article>
-        <a href={`#/projects/${project.id}`} className="mt-10 inline-flex border-b border-[#1D1D1F] pb-1 text-[14px] font-semibold hover:border-[#E60012] hover:text-[#E60012]">← {project.title} 요약으로</a>
+        <a href={`#/projects/${project.id}`} className="mt-10 inline-flex border-b border-[#1D1D1F] pb-1 text-[14px] font-semibold hover:border-[#E60012] hover:text-[#E60012]">← {project.title} 상세로</a>
       </main>
     </div>
   );
@@ -633,10 +795,14 @@ function DevelopmentLogPage({ project }: { project: Project }) {
 export default function App() {
   const [introDone, setIntroDone] = useState(false);
   const [hash, setHash] = useState(() => window.location.hash);
-  const route = /^#\/projects\/([^/]+)(?:\/logs\/(design-and-implementation))?$/.exec(hash);
+  const route = /^#\/projects\/([^/]+)(?:\/logs\/([a-z0-9-]+))?$/.exec(hash);
   const selectedProject = PROJECTS.find((project) => project.id === route?.[1]) ?? null;
-  const activeLog = route?.[2] && selectedProject ? selectedProject : null;
-  const invalidRoute = hash.startsWith("#/") && !selectedProject;
+  const selectedLog = selectedProject && route?.[2]
+    ? getDevelopmentLogs(selectedProject).find((log) => log.slug === route[2])
+      ?? (selectedProject.id === "02" && route[2] === "design-and-implementation" ? getDevelopmentLogs(selectedProject)[0] : undefined)
+    : undefined;
+  const activeLog = selectedLog && selectedProject ? selectedProject : null;
+  const invalidRoute = hash.startsWith("#/") && (!selectedProject || Boolean(route?.[2] && !selectedLog));
   const setSelectedProject = (project: Project | null) => {
     window.location.hash = project ? `/projects/${project.id}` : "work";
   };
@@ -650,12 +816,12 @@ export default function App() {
   useEffect(() => {
     const previousTitle = document.title;
     if (activeLog) {
-      document.title = `${activeLog.title} — 기획과 구현 | 황경상`;
+      document.title = `${selectedLog?.title} | 황경상`;
       window.scrollTo(0, 0);
       document.querySelector<HTMLElement>("h1")?.focus({ preventScroll: true });
     }
     return () => { document.title = previousTitle; };
-  }, [activeLog]);
+  }, [activeLog, hash]);
 
   useEffect(() => {
     const introTimer = window.setTimeout(() => setIntroDone(true), 1050);
@@ -721,7 +887,7 @@ export default function App() {
     }
   };
 
-  if (activeLog) return <DevelopmentLogPage project={activeLog} />;
+  if (activeLog && selectedLog) return <DevelopmentLogPage project={activeLog} log={selectedLog} />;
   if (invalidRoute) return (
     <main style={BODY} className="grid min-h-screen place-content-center gap-5 bg-[#F5F5F7] px-6 text-center text-[#1D1D1F]">
       <h1 className="text-2xl font-bold">페이지를 찾을 수 없어요.</h1>
@@ -1027,7 +1193,7 @@ export default function App() {
                 <div style={MONO} className="mb-3 text-[10px] uppercase tracking-[0.24em] text-[#E60012]">
                   Product detail
                 </div>
-                <p className="max-w-4xl break-keep text-[16px] font-bold leading-[1.75] text-[#1D1D1F] sm:text-[18px]">
+                <p className="max-w-4xl whitespace-pre-line break-keep text-[16px] font-bold leading-[1.75] text-[#1D1D1F] sm:text-[18px]">
                   {selectedProject.detailIntro}
                 </p>
 
@@ -1126,18 +1292,23 @@ export default function App() {
               <section aria-labelledby="development-logs-title" className="mt-7 border-t border-[#E5E5EA] pt-6">
                 <div className="mb-4 flex items-baseline justify-between gap-4">
                   <h3 id="development-logs-title" className="text-[22px] font-black tracking-[-0.04em]">개발로그</h3>
-                  <span className="text-[12px] text-[#86868B]">1편</span>
+                  <span className="text-[12px] text-[#86868B]">{getDevelopmentLogs(selectedProject).length}편</span>
                 </div>
+                <div className="grid gap-3">
+                {getDevelopmentLogs(selectedProject).map((log) => (
                 <a
-                  href={`#/projects/${selectedProject.id}/logs/design-and-implementation`}
+                  key={log.slug}
+                  href={`#/projects/${selectedProject.id}/logs/${log.slug}`}
                   className="group flex items-start justify-between gap-5 rounded-[20px] border border-[#D2D2D7] bg-[#FBFBFD] p-5 transition-colors hover:border-[#E60012]/40 hover:bg-[#FFF8F8] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#E60012]"
                 >
                   <div className="min-w-0">
-                    <h4 className="break-keep text-[17px] font-bold leading-[1.5]">{selectedProject.title} — 기획과 구현</h4>
-                    <p className="mt-2 break-keep text-[13px] leading-[1.8] text-[#6E6E73]">{selectedProject.planningSections?.map((section) => section.title).join(" · ")}</p>
+                    <h4 className="break-keep text-[17px] font-bold leading-[1.5]">{log.title}</h4>
+                    <p className="mt-2 break-keep text-[13px] leading-[1.8] text-[#6E6E73]">{log.summary}</p>
                   </div>
                   <ArrowUpRight size={20} className="mt-1 shrink-0 text-[#E60012]" aria-hidden="true" />
                 </a>
+                ))}
+                </div>
               </section>
             </div>
           </section>
