@@ -810,7 +810,7 @@ function detailEmphasis(text: string = "") {
     if (!phrase) return [separator, paragraph];
     const start = paragraph.indexOf(phrase);
     return [separator, paragraph.slice(0, start),
-      <strong key={index} className="font-semibold text-[#E60012]">{phrase}</strong>,
+      <strong key={index} className="bg-[#FCE8EA] px-0.5 font-medium text-[#424245] [box-decoration-break:clone]">{phrase}</strong>,
       paragraph.slice(start + phrase.length)];
   });
 }
@@ -1266,15 +1266,16 @@ export default function App() {
                     >
                       <div className={getSectionImages(section).length ? "grid items-start gap-8 md:grid-cols-[minmax(0,1.55fr)_minmax(0,1fr)] md:gap-10" : "max-w-[720px]"}>
                         <div>
-                          <div style={MONO} className="mb-3 text-[12px] tracking-[0.12em] text-[#E60012]">
+                          <div style={MONO} className="mb-3 text-[12px] tracking-[0.12em] text-[#86868B]">
                             {section.label.split(" / ")[0]}
                           </div>
-                          <h4 className="break-keep text-[19px] font-semibold leading-[1.5] tracking-[-0.025em] text-[#E60012]">
+                          <h4 className="break-keep text-[19px] font-semibold leading-[1.5] tracking-[-0.025em] text-[#232326]">
                             {section.title}
                           </h4>
                           <div className="mt-5 space-y-5 break-keep text-[16px] font-normal leading-[1.85] text-[#424245]">
                             <p>{detailEmphasis(section.intent)}</p>
-                            <p>{detailEmphasis(section.execution)}</p>
+                            <p>{DETAIL_EMPHASIS.some((phrase) => section.intent.includes(phrase))
+                              ? section.execution : detailEmphasis(section.execution)}</p>
                           </div>
                         </div>
 
