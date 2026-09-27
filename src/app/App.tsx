@@ -1,4 +1,4 @@
-import { type KeyboardEvent, useEffect, useState } from "react";
+import { type KeyboardEvent, useEffect, useRef, useState } from "react";
 import { ArrowUpRight, X } from "lucide-react";
 
 type ProjectLink = {
@@ -816,6 +816,15 @@ function detailEmphasis(text: string = "") {
 }
 
 export default function App() {
+  const [expandedImage, setExpandedImage] = useState<{ src: string; alt: string } | null>(null);
+  const imageDialog = useRef<HTMLDialogElement>(null);
+
+  useEffect(() => {
+    const dialog = imageDialog.current;
+    if (expandedImage && dialog && !dialog.open) dialog.showModal();
+    else if (!expandedImage && dialog?.open) dialog.close();
+  }, [expandedImage]);
+
   const [introDone, setIntroDone] = useState(false);
   const [hash, setHash] = useState(() => window.location.hash);
   const route = /^#\/projects\/([^/]+)(?:\/logs\/([a-z0-9-]+))?$/.exec(hash);
@@ -875,8 +884,9 @@ export default function App() {
     const dialog = document.querySelector<HTMLElement>('[role="dialog"]');
     dialog?.querySelector<HTMLElement>('button')?.focus();
     const handleKeyDown = (event: globalThis.KeyboardEvent) => {
+      if (imageDialog.current?.open) return;
       if (event.key === "Tab" && dialog) {
-        const controls = Array.from(dialog.querySelectorAll<HTMLElement>('button, a[href], [tabindex="0"]'));
+        const controls = Array.from(dialog.querySelectorAll<HTMLElement>('button, a[href], [tabindex="0"]')).filter((element) => element.getClientRects().length > 0);
         const first = controls[0], last = controls[controls.length - 1];
         if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last?.focus(); }
         else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first?.focus(); }
@@ -1257,7 +1267,7 @@ export default function App() {
                   </div>
                 </div>
 
-                <p className="mb-4 text-[12px] text-[#6E6E73]">이미지를 누르면 원본을 볼 수 있습니다.</p>
+                <p className="mb-4 text-[12px] text-[#6E6E73]">이미지를 누르면 확대해서 볼 수 있습니다.</p>
                 <div className="grid grid-cols-1 divide-y divide-[#E5E5EA]">
                   {selectedProject.planningSections?.map((section) => (
                     <article
@@ -1283,12 +1293,11 @@ export default function App() {
                           <figure className="flex min-w-0 flex-col gap-4">
                             <div className={getSectionImages(section).length > 1 ? "grid w-full grid-cols-2 items-center gap-3" : "flex items-center justify-center"}>
                               {getSectionImages(section).map((image, imageIndex) => (
-                                <a
+                                <button
                                   key={`${selectedProject.id}-${section.label.split(" / ")[0]}-image-${imageIndex}`}
-                                  href={image}
-                                  target="_blank"
-                                  rel="noreferrer"
-                                  aria-label={`${selectedProject.title} ${section.title} 이미지 ${imageIndex + 1} 원본 보기`}
+                                  type="button"
+                                  onClick={() => setExpandedImage({ src: image, alt: section.imageCaption || `${selectedProject.title} ${section.title} 화면` })}
+                                  aria-label={`${selectedProject.title} ${section.title} 이미지 ${imageIndex + 1} 확대 보기`}
                                   className="flex min-w-0 justify-center rounded-[12px] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#E60012]"
                                 >
                                   <img
@@ -1297,7 +1306,7 @@ export default function App() {
                                     loading="lazy"
                                     className="max-h-[460px] max-w-full rounded-[12px] object-contain"
                                   />
-                                </a>
+                                </button>
                               ))}
                             </div>
                             <figcaption className="text-center text-[11px] leading-relaxed text-[#6E6E73]">
@@ -1335,6 +1344,21 @@ export default function App() {
           </section>
         </div>
       )}
+
+      <dialog
+        ref={imageDialog}
+        aria-label="이미지 확대 보기"
+        onCancel={(event) => { event.preventDefault(); setExpandedImage(null); }}
+        onClose={() => setExpandedImage(null)}
+        onClick={(event) => { if (event.target === event.currentTarget) setExpandedImage(null); }}
+        className="fixed inset-0 m-0 h-dvh max-h-none w-screen max-w-none items-center justify-center border-0 bg-black/85 p-5 backdrop:bg-transparent open:flex sm:p-12"
+      >
+        <button type="button" autoFocus aria-label="이미지 닫기" onClick={() => setExpandedImage(null)}
+          className="absolute right-4 top-4 flex h-11 w-11 items-center justify-center rounded-full bg-white/15 text-white hover:bg-white/25 focus-visible:outline-2 focus-visible:outline-white">
+          <X size={24} />
+        </button>
+        {expandedImage && <img src={expandedImage.src} alt={expandedImage.alt} className="max-h-[calc(100dvh-112px)] max-w-full object-contain" />}
+      </dialog>
 
       {/* ── ABOUT ───────────────────────────────────────────── */}
       <section id="about" className="reveal-on-scroll bg-white px-6 py-14 lg:px-16 lg:py-20">
