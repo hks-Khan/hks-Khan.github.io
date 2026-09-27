@@ -1310,7 +1310,7 @@ export default function App() {
                   ))}
                 </div>
               </div>
-              <section aria-labelledby="development-logs-title" className="mt-6 border-t border-[#E5E5EA] pt-10">
+              <section hidden aria-labelledby="development-logs-title" className="mt-6 border-t border-[#E5E5EA] pt-10">
                 <div className="mb-4 flex items-baseline justify-between gap-4">
                   <h3 id="development-logs-title" className="text-[23px] font-semibold tracking-[-0.03em]">개발로그</h3>
                   <span className="text-[12px] text-[#86868B]">{getDevelopmentLogs(selectedProject).length}편</span>
