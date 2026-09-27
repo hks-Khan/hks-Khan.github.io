@@ -14,6 +14,7 @@ type PlanningSection = {
   imageCaption?: string;
   intent: string;
   execution: string;
+  body?: string;
 };
 
 type DevelopmentLog = {
@@ -77,43 +78,57 @@ const PROJECTS: Project[] = [
     "featured": true,
     "detailIntro": "자유수영에서는 정해진 프로그램 없이 그날 하고 싶은 영법과 거리를 선택해 운동하기 쉽습니다. 꾸준히 수영해도 다음 운동에서 무엇을 바꾸고 얼마나 늘려야 할지는 스스로 정해야 합니다. 수영강사로 일하며 접한 이 문제에서 Aquach를 시작했습니다. 훈련 프로그램을 직접 설계하는 부담을 줄이고, 자신의 목적과 수준에 맞는 계획을 따라 운동하고 기록하도록 만들었습니다.\n\n현재는 점진적 과부하처럼 훈련량과 강도를 단계적으로 조절하는 원리를 여러 회차에 담을 수 있도록 SoomchaSwim으로 개편하고 있습니다. 함께 개발 중인 Soomcha와는 앱 허브 형태로 묶어갈 계획입니다.",
     "planningSections": [
-      {
+    {
         "label": "01 / Aquach · SoomchaSwim",
-        "title": "훈련 목적에 맞는 수영 프로그램 구성",
-        "image": "/images/projects/soomchaswim-workout.png",
-        "intent": "호흡과 자세를 익히는 훈련, 스트로크 효율을 높이는 훈련, 유산소·스프린트·장거리 완주처럼 목적에 따라 프로그램을 고르도록 구성했습니다. 목표와 기록 등의 맥락으로 추천 후보를 정하고, 선택한 프로그램에 수준·풀 규격·장비 조건을 적용합니다.",
-        "execution": "서버는 해당 조건의 회차별 운동 데이터를 읽고 장비 대체안을 선택합니다. 주당 운동 횟수와 선호 요일을 반영해 일정을 구성하고, 사용자가 수행할 프로그램과 세션을 저장합니다.",
-        "imageCaption": "SoomchaSwim 개발 버전 · 회차별 운동 상세"
-      },
-      {
-        "label": "02 / Aquach · SoomchaSwim",
-        "title": "LLM 기반 운동 생성에서 프로그램 기반 설계로",
-        "image": "",
-        "intent": "Aquach의 LLM 기반 운동 생성에서 출발해, 훈련 목적과 구성 규칙을 템플릿으로 제공하는 방식을 거쳤습니다. 템플릿 정책과 운동 라이브러리를 AI에 전달하고, 생성된 프로그램 설계안을 코드에서 세션으로 구성했습니다.",
-        "execution": "현재 SoomchaSwim은 회차별 운동을 미리 준비하고 사용자 조건에 맞는 구성을 선택합니다. 주차별 진행과 회복·최종 목표를 프로그램 원본에서 검토할 수 있으며, AI는 제목·개인화 요약·코치 안내를 작성합니다. 프로그램 저장 후 문구를 요청하므로 AI 호출이 실패해도 기본 안내로 시작할 수 있습니다."
-      },
-      {
-        "label": "03 / Aquach · SoomchaSwim",
-        "title": "회차별 훈련 데이터를 설계하고 검증하기",
-        "image": "",
-        "intent": "8개 프로그램의 84개 회차를 준비하고, 초급·중급·상급과 25m·50m·25yd 풀에 따른 756개 처방 조합을 데이터로 관리합니다. 각 회차에는 운동 블록과 세트, 거리·반복·휴식·출발 간격, 장비 대체안을 담았습니다.",
-        "execution": "같은 원본에서 DB 반영용 데이터, 앱 테스트용 데이터, 검토용 문서를 생성합니다. 원본 구조와 운동 참조 등을 검사해 자료 간 차이를 줄이고, 사용자가 시작할 때 확정된 세션을 저장해 이후 템플릿 수정이 진행 중인 운동에 영향을 주지 않도록 했습니다."
-      },
-      {
-        "label": "04 / Aquach · SoomchaSwim",
-        "title": "iPhone에서 계획하고 Apple Watch에서 수행하기",
-        "image": "/images/detail/aquach-watch-plan.png",
-        "intent": "iPhone의 운동 구성을 Watch에서 실행할 세트 목록으로 변환해 전달합니다. Watch에서는 받은 계획과 세트별 운동 내용을 확인하고, 운동을 마친 뒤 iPhone에서 기록을 돌아볼 수 있습니다.",
-        "execution": "Watch에 도달할 수 있으면 sendMessage로 즉시 보내고, 전송이 실패하거나 연결할 수 없으면 transferUserInfo로 전달을 예약합니다. iPhone에서 받은 완료 메시지는 고유 ID로 중복을 확인하고 로컬 파일에 보관합니다.",
+        "title": "LLM 기반 운동 생성에서 사전 설계 프로그램으로",
+        "image": "/images/detail/swim-01-generation.png",
         "images": [
-          "/images/detail/aquach-watch-plan.png",
-          "/images/detail/aquach-watch-run.png",
-          "/images/detail/aquach-calendar.png",
-          "/images/detail/aquach-record-summary.png"
+            "/images/detail/swim-01-generation.png"
         ],
-        "imageCaption": "Aquach · Watch 계획 수신·세트 진행 / iPhone 캘린더·운동 기록"
-      }
-    ],
+        "imageCaption": "운동 생성 구조의 변화",
+        "intent": "",
+        "execution": "",
+        "body": "### 초기 LLM 생성의 한계\n\nAquach의 첫 운동 생성은 Gemini·OpenRouter·Azure OpenAI를 순서대로 시도하는 폴백 체인으로 구현했습니다. 사용자 프로필과 최근 운동 이력을 텍스트로 변환해 프롬프트에 넣고, 응답을 파싱해 세트 목록을 구성하는 방식이었습니다.\n\n운영하면서 드러난 문제는 세 가지였습니다. 하나는 **수치의 비결정성**입니다. 세트별 거리를 합산하면 총거리와 맞지 않거나, 풀 길이(25m·50m) 배수가 아닌 거리를 생성하는 일이 반복됐습니다. 수영에서 풀 길이 배수가 아닌 거리는 실행 불가능합니다. 다른 하나는 **응답 시간**입니다. 다단계 LLM 호출과 결과 파싱에 5~15초 이상 걸렸고, 그 사이 사용자가 화면을 떠나는 일이 잦았습니다. 마지막으로 **비용과 안정성**인데, 요청마다 토큰 비용이 발생하고 레이트 리밋(429)이나 공급자 장애로 생성이 아예 실패하는 경우도 있었습니다.\n\n### 템플릿 엔진으로의 전환 (Aquach v1.1.0)\n\n2025년 8월, LLM이 세트 수준의 운동을 결정하던 구조를 데이터 기반 템플릿 엔진으로 교체했습니다. 전환 기록에는 목표를 \"안정성(일관된 거리·시간·구성), 초보자 친화 UX, 재현 가능성, 다양성 제어\"로 명시하고 있습니다.\n\n새로운 생성 흐름은 다음과 같습니다. 활성 템플릿을 조회하고, 사용자 프로필·최근 운동 기록·목표 일치 여부를 종합한 적합도 점수를 매겨 후보를 정합니다. 선택된 템플릿의 구조대로 총거리를 각 구간에 분배하되, 거리를 풀 길이 배수에 맞추고 세트당 반복 횟수 상한을 적용합니다. 운동 종목은 Supabase RPC로 조건에 맞는 후보를 검색하고, 사용자 수준·선호 영법·최근 반복 여부를 반영한 가중 선택으로 결정합니다.\n\n이 전환 뒤 응답 시간은 1초 미만으로 줄었고, 거리 합산 불일치 문제가 해소됐습니다. 다만 전환 직후에는 동점 후보가 고정되면서 같은 템플릿이 반복 선택되는 새로운 문제가 발생했습니다. 최근 사용 템플릿에 단계적 감점(직전 −4점, 2회 전 −2점, 3회 전 −1점)을 부여하고 동점군에 결정론적 노이즈를 더해 해결한 과정을 기록했습니다.\n\n### 다회차 프로그램 설계 (SoomchaSwim)\n\n한 번의 운동을 잘 구성하는 것과, 여러 회차에 걸쳐 훈련량을 단계적으로 높이는 것은 다른 문제입니다. 장거리 완주가 목표라면 한 회차의 총거리뿐 아니라 반복 구간과 연속영, 회복 회차, 최종 점검의 순서까지 설계해야 합니다.\n\nSoomchaSwim의 다회차 프로그램은 이 필요를 다룹니다. 호흡·자세 교정, 스트로크 효율, 유산소·스프린트·장거리 완주 등 훈련 목적별로 마스터 템플릿을 준비하고, 각 템플릿에 주차별 부하 상승 지수, 수준·세션 시간별 목표 거리 범위, 주차별 훈련 가이드라인, 기술·유산소·속도·회복의 블록 구성 비율을 정의합니다. 예를 들어 4주 호흡 리듬 프로그램의 초급 과정에서 부하 지수는 `[60, 70, 82, 92]`로 약 53% 상승하도록 설정돼 있습니다.\n\n현재 준비된 데이터는 8개 프로그램, 84개 회차입니다. 초급·중급·상급 3단계와 25m·50m·25yd 풀 규격을 조합하면 756개 처방이고, 이 데이터를 같은 원본에서 DB 마이그레이션용 SQL, 앱 테스트용 fixture, 검토용 Markdown 문서로 생성합니다. 원본의 허용 필드·운동 라이브러리 참조·번역 등을 빌드 스크립트가 검사하고, 원본 해시를 산출물에 포함해 어떤 원본에서 만들어졌는지 추적합니다.\n\n사용자가 프로그램을 시작하면 원자적 RPC가 해당 조건의 회차별 처방을 읽어 사용자 세션으로 복사합니다. 이때 원본 스냅샷과 실제 수행할 데이터를 각각 저장합니다. 이후 마스터 템플릿을 수정하더라도 이미 시작된 프로그램의 세션은 영향을 받지 않습니다. 원본의 불변성은 DB 트리거가 강제합니다."
+    },
+    {
+        "label": "02 / Aquach · SoomchaSwim",
+        "title": "기록과 프로필 조건을 반영한 프로그램 개인화",
+        "image": "/images/detail/swim-02-personalization.png",
+        "images": [
+            "/images/detail/swim-02-personalization.png"
+        ],
+        "imageCaption": "테스트 데이터 기반 실제 생성 결과 · 동일한 초급·25m·주 2회 조건에서 수행 기록만 변경",
+        "intent": "",
+        "execution": "",
+        "body": "### 같은 프로그램, 다른 출발점\n\n같은 훈련 프로그램이라도 최근에 1,500m를 수영한 사람과 500m를 수영한 사람이 같은 첫 회차를 받으면 한쪽에는 너무 쉽거나 다른 쪽에는 무리가 됩니다. 프로그램 개인화는 이 차이를 다룹니다.\n\n**분석 대상은 실제 수행 기록입니다.** 서버의 생성 트랜잭션에서 인증된 사용자의 최근 90일 내 최대 50개 기록을 분석합니다. 앱이 미리 계산한 결과를 서버에 전달하는 방식이 아니라, 서버가 트랜잭션 안에서 직접 기록을 읽고 분석하는 구조입니다. 클라이언트가 개인화 분석 정보를 변조해 전송하면 트리거가 거부합니다.\n\n분석하는 지표는 다음과 같습니다:\n\n- **기준 거리**: 최근 5개 기록 거리의 중앙값. 야드(`yd`)와 미터(`m`) 혼용 시 미터로 환산합니다. 평균 대신 중앙값을 쓰는 것은 한두 번의 이상치가 기준을 왜곡하지 않게 하기 위함입니다.\n- **최근 체감 강도(RPE)**: 최근 3개 기록의 RPE 중앙값.\n- **운동 공백**: 마지막 운동 이후 경과 일수.\n- **운동량 추세**: 최근 3회와 이전 3회 거리 중앙값의 비율, 최근 7일과 직전 7일 운동량 비율.\n- **수행률**: 같은 프로그램 내에서 계획 거리 대비 실제 완료 거리의 비율.\n\n### 실제로 바뀌는 것: 거리·반복·휴식·강도·시간\n\n이 분석 결과에 따라 **세트의 거리, 반복 횟수, 휴식 시간, 목표 RPE, 출발 간격, 예상 소요 시간이 실제로 변경됩니다.** 추천 텍스트만 바뀌는 것이 아닙니다.\n\nDB 함수의 보정 로직을 코드에서 확인한 호출 경로는 이렇습니다:\n\n1. **초기 운동량 비율 계산**: 사용자의 기준 거리를 프로그램 첫 회차 원본 거리로 나눠 0.50~1.10 범위로 제한합니다.\n2. **피로·복귀 안전 장치**: RPE ≥ 8이면 운동량 비율을 0.85 이하로 낮추고 세트당 휴식을 15초 늘리며 목표 RPE를 1 낮춥니다. 14일 이상 공백, 주간 운동량 급증(1.3배 초과), 운동량 급감(0.7 미만), 수행률 75% 미만에도 각각 보정이 적용됩니다.\n3. **점진적 목표 수렴**: 첫 회차는 사용자의 현재 수준에서 시작하되, 세션이 진행됨에 따라 원래 프로그램의 최종 목표 부하에 점진적으로 수렴합니다. 장거리 완주 프로그램의 마지막 메인 세트 목표 거리·반복은 변경하지 않고 유지합니다.\n4. **풀 길이 배수·운동별 제한 적용**: 보정된 거리를 풀 길이 배수에 맞추고, 운동별 최소·최대 거리와 반복 제한을 확인합니다. 유효한 구성이 8회 시도 이내에 나오지 않으면 명시적으로 실패 처리합니다.\n\n장비 매칭도 이 과정에 포함됩니다. 각 블록에 정의된 장비별 대체 구성 중에서 사용자가 프로필에 등록한 장비와 가장 많이 일치하는 대안을 선택하고, 요구 장비가 없으면 맨몸 드릴로 대체합니다. 고강도 프로그램(페이스 조절·스프린트)에서는 사용자가 선택한 운동 요일 간격이 48시간 이상인지도 DB에서 검증합니다.\n\n### 사용자 수정과 보정의 공존\n\n사용자가 세션 세트를 직접 수정할 수 있는데, 이때 원본 운동 구성은 변경하지 않고 사용자 수정 내용만 별도로 기록합니다. UI·Watch 전송·기록 저장 시에는 운동 구성 선택 함수가 수동 편집이 있으면 그것을, 없으면 개인화된 원본을 반환합니다. 수정 시에도 총거리 50%~150% 범위와 해당 템플릿의 운동 종목 풀 내 교체만 허용됩니다.\n\n### Edge Function 오류 전달\n\n생성 과정에서 부상 프로필 충돌, 영법 제약 충돌, 시간 부족, 유효 세트 구성 불가 같은 조건 위반이 발생하면 각각 명시적 오류 코드를 반환합니다. 내부 DB 스택 트레이스는 사용자에게 노출하지 않고, 허용된 오류 코드만 400으로 전달하며 알 수 없는 오류는 500으로 마스킹합니다. AI 코칭 문구(제목·개인화 요약·코치 안내) 생성에는 2.5초 타임아웃을 적용하고, 실패해도 프로그램 생성 자체는 완료되어 기본 문구로 시작할 수 있습니다."
+    },
+    {
+        "label": "03 / Aquach · SoomchaSwim",
+        "title": "iPhone–Apple Watch 수영 연동",
+        "image": "/images/detail/aquach-watch-plan.png",
+        "images": [
+            "/images/detail/aquach-watch-plan.png",
+            "/images/detail/aquach-watch-run.png",
+            "/images/detail/aquach-record-summary.png"
+        ],
+        "imageCaption": "기존 실제 캡처 · Watch 계획·진행과 iPhone 기록은 기능별 예시이며 같은 운동의 연속 기록이 아닙니다.",
+        "intent": "",
+        "execution": "",
+        "body": "### 수영장 환경의 제약\n\n수중에서 정전식 터치스크린은 작동하지 않습니다. 수영 시작과 함께 Apple Watch의 워터락이 활성화되면 터치와 스와이프가 차단되고, Digital Crown 회전만 입력으로 남습니다. 벽에서 쉬는 5~10초 안에 현재 세트를 확인해야 하고, 한 손으로 조작해야 합니다.\n\n이 환경에 맞춰 Watch 앱을 설계했습니다. 현재 세트의 운동명과 거리를 60pt 볼드 폰트로 표시하고, Crown을 90% 이상 회전하면 다음 세트로 전환합니다. 운동 종료 후 물 빼기(Water Eject)로 워터락을 해제하면 터치가 복원되고, Crown을 돌려 체감 강도(RPE 1~10)를 기록합니다.\n\n### 통신 경로와 오프라인 내구성\n\nWatch는 Supabase에 직접 통신하지 않습니다. 배터리 소모와 인증 토큰 노출을 피하기 위해 모든 데이터는 iPhone을 거칩니다.\n\n**iPhone → Watch (계획 전달)**: Watch가 도달 가능(`isReachable`)하면 `WCSession.sendMessage`로 즉시 보냅니다. 전송이 실패하거나 Watch에 연결할 수 없으면 `transferUserInfo`로 전달을 예약해 백그라운드에서 전송합니다.\n\n**Watch → iPhone (완료 기록)**: 운동이 끝나면 Watch는 완료 데이터를 로컬 큐에 저장한 뒤 `transferUserInfo`로 iPhone에 보냅니다. 수영장에서 iPhone과 블루투스 범위를 벗어났을 수 있으므로, iPhone의 네이티브 모듈은 메시지를 받으면 React Native 앱이 꺼져 있거나 백그라운드 상태일 경우를 대비해 UserDefaults 기반 펜딩 큐에 먼저 저장합니다. 앱이 재실행되면 미처리 완료 건을 읽어 Supabase에 저장한 뒤 큐에서 제거합니다.\n\n**중복 기록 방지**: HealthKit Workout UUID가 있으면 그것을 멱등 키로 사용합니다. UUID가 없는 경우(수영 데이터가 분리되거나 워치에서 직접 종료된 경우)에는 메시지 식별자를 바탕으로 UUID v5 방식의 결정론적 고유 키를 생성해 중복 삽입을 차단합니다.\n\n### 건강 데이터의 저장 경계\n\n심박수, 소모 칼로리, VO2 Max, 심박수 회복 같은 생체 데이터는 서버(Supabase)에 저장하지 않습니다. 서버에는 HealthKit 운동 UUID와 거리·랩 수·영법·SWOLF 등 운동 수행 지표만 저장합니다. 앱에서 운동 상세를 볼 때 Expo Custom Native Module이 iPhone 로컬 HealthKit에서 UUID 기반으로 심박수·칼로리를 실시간 조회해 렌더링합니다. 민감 정보가 기기 밖으로 나가지 않는 구조입니다."
+    },
+    {
+        "label": "04 / Aquach · SoomchaSwim",
+        "title": "Supabase DB 설계와 운영 패턴",
+        "image": "/images/detail/swim-04-database.png",
+        "images": [
+            "/images/detail/swim-04-database.png"
+        ],
+        "imageCaption": "프로그램 생성·저장과 원본·사용자 수정의 관리 구조",
+        "intent": "",
+        "execution": "",
+        "body": "### 스키마 격리와 마이그레이션\n\nSoomchaSwim의 프로그램 테이블은 Supabase 기본 `public` 스키마가 아닌 수영 도메인 전용 스키마에 둡니다. 기존 Aquach v0 데이터와 분리해 마이그레이션 실패 시 롤백 범위를 좁히고, 클라이언트 설정에서 스키마를 명시적으로 지정합니다.\n\n핵심 테이블은 마스터 프로그램 원본 → 회차별 원본 처방 → 사용자가 시작한 프로그램 → 사용자별 확정 세션 → 실제 완료 기록로 이어지며, 이 계층이 프로그램 설계부터 수행 기록까지의 데이터 흐름을 구성합니다.\n\n### 원자성과 네트워크 장애 복구\n\n프로그램 생성은 하나의 DB 트랜잭션 안에서 사용자 프로그램 생성, 모든 회차 세션 삽입, 개인화 보정, 일정 검증, 장비 매칭을 처리합니다. 어느 단계라도 실패하면 전체가 롤백됩니다.\n\n모바일 네트워크가 생성 도중 끊겨 응답을 받지 못하면 중복 프로그램이 만들어질 수 있습니다. 이를 막기 위해 클라이언트가 생성 요청마다 UUID 형태의 요청 식별자를 만들어 HTTP 헤더로 전송하고, DB 테이블에 사용자 ID와 생성 요청 ID의 복합 고유 인덱스를 적용합니다. 네트워크 오류가 감지되면 같은 요청 식별자로 이미 생성된 프로그램이 있는지 조회해 복구합니다.\n\n### RLS와 보안 방어\n\n모든 사용자 데이터 테이블은 Row Level Security가 활성화돼 있고 인증된 사용자와 데이터 소유자가 일치하는 조건으로 본인 데이터만 접근합니다. 개인화에 사용되는 내부 분석 함수는 `PUBLIC`·`anon`·`authenticated`의 직접 EXECUTE 권한을 제거하고, 오직 SECURITY DEFINER RPC나 트리거 안에서만 실행되도록 격리했습니다.\n\nAquach에서는 Supabase 클라이언트에 네트워크 상태 사전 확인(`NetInfo`)을 래핑한 쿼리 함수를 사용합니다. 오프라인이면 DB 호출을 시도하지 않고 즉시 표준 오류를 반환해 사용자에게 네트워크 상태를 안내합니다. 운동 기록 삽입 시에는 DB 트리거가 프로필의 누적 거리·세션 수 통계를 원자적으로 갱신하고, React Query의 계층적 쿼리 키 체계로 캘린더·대시보드 화면이 자동으로 갱신됩니다."
+    }
+],
     "statusNote": "Aquach · App Store 출시 / SoomchaSwim · 후속 개발 중",
     "developmentLogs": [
       {
@@ -815,6 +830,23 @@ function detailEmphasis(text: string = "") {
   });
 }
 
+
+function ArticleBody({ text }: { text: string }) {
+  const inline = (value: string) => value.split(/(\*\*.*?\*\*|`[^`]+`)/g).map((part, i) =>
+    part.startsWith("**") ? <strong key={i} className="font-medium text-[#242426]">{part.slice(2, -2)}</strong>
+      : part.startsWith("`") ? <span key={i}>{part.slice(1, -1)}</span> : part);
+  return <div className="space-y-5 break-keep text-[16px] font-normal leading-[1.9] text-[#424245]">
+    {text.split(/\n\s*\n/).map((block, i) => {
+      if (block.startsWith("### ")) return <h5 key={i} className="pt-5 text-[18px] font-semibold leading-relaxed text-[#242426]">{block.slice(4)}</h5>;
+      if (/^[-\d]/.test(block) && /^(?:- |\d+\. )/.test(block)) {
+        const items = block.split("\n").map((line, j) => <li key={j}>{inline(line.replace(/^(?:- |\d+\. )/, ""))}</li>);
+        return block.startsWith("- ") ? <ul key={i} className="list-disc space-y-3 pl-5">{items}</ul> : <ol key={i} className="list-decimal space-y-3 pl-5">{items}</ol>;
+      }
+      return <p key={i}>{inline(block)}</p>;
+    })}
+  </div>;
+}
+
 export default function App() {
   const [expandedImage, setExpandedImage] = useState<{ src: string; alt: string } | null>(null);
   const imageDialog = useRef<HTMLDialogElement>(null);
@@ -1274,6 +1306,27 @@ export default function App() {
                       key={`${selectedProject.id}-${section.title}`}
                       className="py-10 first:pt-3"
                     >
+                      {section.body ? (
+                        <div>
+                          <div style={MONO} className="mb-3 text-[12px] tracking-[0.12em] text-[#86868B]">{section.label.split(" / ")[0]}</div>
+                          <h4 className="max-w-[820px] break-keep text-[23px] font-semibold leading-[1.5] tracking-[-0.025em] text-[#232326]">{section.title}</h4>
+                          <figure className="my-8">
+                            <div className={getSectionImages(section).length > 1 ? "grid grid-cols-1 items-center gap-6 sm:grid-cols-3" : "w-full"}>
+                              {getSectionImages(section).map((image, imageIndex) => (
+                                <button key={image} type="button"
+                                  onClick={() => setExpandedImage({ src: image, alt: section.imageCaption || section.title })}
+                                  aria-label={`${selectedProject.title} ${section.title} 이미지 ${imageIndex + 1} 확대 보기`}
+                                  className="flex w-full justify-center rounded-lg focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#E60012]">
+                                  <img src={image} alt={section.imageCaption || section.title} loading="lazy"
+                                    className={getSectionImages(section).length > 1 ? "max-h-[390px] max-w-full rounded-lg object-contain" : "h-auto w-full rounded-lg"} />
+                                </button>
+                              ))}
+                            </div>
+                            <figcaption className="mt-4 text-center text-[12px] leading-relaxed text-[#78787D]">{section.imageCaption}</figcaption>
+                          </figure>
+                          <div className="mx-auto max-w-[760px]"><ArticleBody text={section.body} /></div>
+                        </div>
+                      ) : (
                       <div className={getSectionImages(section).length ? "grid items-start gap-8 md:grid-cols-[minmax(0,1.55fr)_minmax(0,1fr)] md:gap-10" : "max-w-[720px]"}>
                         <div>
                           <div style={MONO} className="mb-3 text-[12px] tracking-[0.12em] text-[#86868B]">
@@ -1315,6 +1368,7 @@ export default function App() {
                           </figure>
                         )}
                       </div>
+                      )}
                     </article>
                   ))}
                 </div>
